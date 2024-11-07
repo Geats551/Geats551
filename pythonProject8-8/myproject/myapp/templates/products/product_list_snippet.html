@@ -1,0 +1,16 @@
+<!-- products/product_list_snippet.html -->
+<div class="product-list">
+    {% for product in products %}
+        <div class="product-item">
+            <h3>{{ product.name }}</h3>
+            {% if product.image_url %}
+            <img src="{{ product.image_url }}" alt="{{ product.name }}">
+        {% endif %}
+            <p>{{ product.description|truncatewords:50 }}</p>
+            <p>Price: {{ product.price }}</p>
+            <!-- Add more details as needed -->
+        </div>
+    {% empty %}
+        <p>No products available.</p>
+    {% endfor %}
+</div>
