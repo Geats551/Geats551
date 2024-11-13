@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Listing</title>
+</head>
+<body>
+
+<!-- 页面头部添加分类列表 -->
+<div id="category-list">
+    <h2>Categories</h2>
+    <ul>
+    {% for category in categories %}
+        <li><a href="{% url 'category_detail' pk=category.pk %}">{{ category.name }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+
+<!-- 原有的产品循环模块保持不变 -->
+{% for product in products %}
+    <div>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        {% if product.image_url %}
+            <img src="{{ product.image_url }}" alt="{{ product.name }}">
+        {% endif %}
+        <p>Price: {{ product.price }}</p>
+        <p>Category: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
+    </div>
+{% endfor %}
+
+</body>
+</html>
