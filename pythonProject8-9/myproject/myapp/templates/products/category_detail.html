@@ -1,0 +1,11 @@
+
+<h1>{{ category.name }}</h1>
+<p>{{ category.description }}</p>
+
+{% if products %}
+    <h2>Products in this category:</h2>
+    <!-- Include the product listing part similar to product_list.html -->
+    {% include 'products/product_list_snippet.html' %}
+{% else %}
+    <p>No products in this category yet.</p>
+{% endif %}

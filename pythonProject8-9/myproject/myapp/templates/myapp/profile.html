@@ -1,0 +1,17 @@
+
+<header>
+    <!-- 页头内容，比如logo和导航栏 -->
+    <nav>
+
+        <a href="{% url 'recommendation' %}">返回</a>
+
+        <!-- 其他导航链接 -->
+    </nav>
+</header>
+{% block content %}
+<h1>Welcome, {{ user.first_name }}!</h1>
+<p>email: {{ user.email}}</p>
+<!-- 添加其他您想展示的用户信息 -->
+
+<a href="{% url 'edit_profile' %}">修改</a>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}默认标题{% endblock %}</title>
+    <!-- 导入CSS和其他静态资源 -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+<header>
+    <!-- 页头内容，比如logo和导航栏 -->
+    <nav>
+        <a href="/">退出</a>
+        <a href="{% url 'profile' %}">个人信息</a>
+        <a href="{% url 'product_list' %}">所有商品</a>
+        <a href="/about/">关于我们</a>
+        <!-- 其他导航链接 -->
+    </nav>
+</header>
+
+<main>
+    <!-- 主体内容区域，由子模板填充 -->
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <!-- 页脚内容，比如版权信息 -->
+    <p>&copy; 2023 Your Company. All rights reserved.</p>
+</footer>
+
+<!-- 可能还有JavaScript引用等 -->
+</body>
+</html>

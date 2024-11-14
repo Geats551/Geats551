@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>产品列表</title>
+</head>
+<body>
+
+<!-- 页面头部添加分类列表 -->
+<div id="category-list">
+    <ul>
+    {% for category in categories %}
+        <li><a href="{% url 'category_detail' pk=category.pk %}">{{ category.name }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+
+<!-- 显示产品信息 -->
+{% for product in products %}
+    <div>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 200px;">
+        {% endif %}
+        <p>价格: {{ product.price }}</p>  <!-- 修改 Price 为 价格 -->
+        <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
+    </div>
+{% endfor %}
+
+</body>
+</html>
