@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>农产品推荐系统</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            text-align: center;<!DOCTYPE html>
+            <html>
+            <head>
+                <title>农产品推荐系统</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f8f9fa;
+                        margin: 0;
+                        padding: 0;
+                        text-align: center;
+                    }
+                    h1, h2 {
+                        color: #333;
+                        margin-top: 20px;
+                    }
+                    input {
+                        margin: 5px;
+                        padding: 8px;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                    }
+                    table {
+                        margin: 20px auto;
+                        border-collapse: collapse;
+                        width: 80%;
+                    }
+                    th, td {
+                        border: 1px solid #333;
+                        padding: 12px;
+                    }
+                    button {
+                        padding: 8px 16px;
+                        background-color: #007bff;
+                        color: #fff;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        margin-top: 10px;
+                    }
+                    button:hover {
+                        background-color: #0056b3;
+                    }
+                </style>
+                <script>
+                    function login() {
+                        var username = document.getElementById('username').value;
+                        var password = document.getElementById('password').value;
+                        // 根据实际情况进行登录验证操作
+                        console.log("登录成功，欢迎" + username);
+                    }
+            
+                    function register() {
+                        var username = document.getElementById('newUsername').value;
+                        var password = document.getElementById('newPassword').value;
+                        // 根据实际情况进行注册操作
+                        console.log("注册成功，用户名：" + username);
+                    }
+                </script>
+            </head>
+            <body>
+                <h1>农产品推荐系统</h1>
+                <h2>登录</h2>
+                <input type="text" id="username" placeholder="用户名"><br>
+                <input type="password" id="password" placeholder="密码"><br>
+                <button onclick="login()">登录</button>
+            
+                <h2>注册</h2>
+                <input type="text" id="newUsername" placeholder="新用户名"><br>
+                <input type="password" id="newPassword" placeholder="新密码"><br>
+                <button onclick="register()">注册</button>
+            
+                <h2>农产品推荐</h2>
+                <table>
+                    <tr>
+                        <th>编号</th>
+                        <th>农产品名称</th>
+                        <th>价格</th>
+                        <th>评论</th>
+                    </tr>
+                    <tr>
+                        <td>001</td>
+                        <td>苹果</td>
+                        <td>$2.00</td>
+                        <td>好吃！</td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>香蕉</td>
+                        <td>$1.00</td>
+                        <td>便宜实惠</td>
+                    </tr>
+                    <tr>
+                        <td>003</td>
+                        <td>西红柿</td>
+                        <td>$1.50</td>
+                        <td>新鲜</td>
+                    </tr>
+                </table>
+            
+                <h2>用户信息</h2>
+                <p>姓名：张三</p>
+                <p>编号</body>
+            </html>
+        }
+        h1, h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+        input {
+            margin: 5px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 12px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            // 根据实际情况进行登录验证操作
+            console.log("登录成功，欢迎" + username);
+        }
+
+        function register() {
+            var username = document.getElementById('newUsername').value;
+            var password = document.getElementById('newPassword').value;
+            // 根据实际情况进行注册操作
+            console.log("注册成功，用户名：" + username);
+        }
+    </script>
+</head>
+<body>
+    <h1>农产品推荐系统</h1>
+    <h2>登录</h2>
+    <input type="text" id="username" placeholder="用户名"><br>
+    <input type="password" id="password" placeholder="密码"><br>
+    <button onclick="login()">登录</button>
+
+    <h2>注册</h2>
+    <input type="text" id="newUsername" placeholder="新用户名"><br>
+    <input type="password" id="newPassword" placeholder="新密码"><br>
+    <button onclick="register()">注册</button>
+
+    <h2>农产品推荐</h2>
+    <table>
+        <tr>
+            <th>编号</th>
+            <th>农产品名称</th>
+            <th>价格</th>
+            <th>评论</th>
+        </tr>
+        <tr>
+            <td>001</td>
+            <td>苹果</td>
+            <td>$2.00</td>
+            <td>好吃！</td>
+        </tr>
+        <tr>
+            <td>002</td>
+            <td>香蕉</td>
+            <td>$1.00</td>
+            <td>便宜实惠</td>
+        </tr>
+        <tr>
+            <td>003</td>
+            <td>西红柿</td>
+            <td>$1.50</td>
+            <td>新鲜</td>
+        </tr>
+    </table>
+
+    <h2>用户信息</h2>
+    <p>姓名：张三</p>
+    <p>编号</body>
+</html>
