@@ -1,0 +1,26 @@
+{% extends 'base_generic.html' %}
+
+<!-- 商品详情部分 -->
+<h1>{{ product.name }}</h1>
+<p>{{ product.description }}</p>
+ <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 200px;">
+ <p>价格: {{ product.price }}</p>  <!-- 修改 Price 为 价格 -->
+        <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
+
+<!-- 评论表单 -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.text }}
+    <button type="submit">提交评论</button>
+</form>
+
+<!-- 显示已有评论 -->
+<h2>已经有的评论：</h2>
+{% for comment in comments %}
+    <div class="comment">
+        <p><strong>{{ comment.user.username }}:</strong> {{ comment.text }}</p>
+        <!-- 直接使用转换后的 created_at 字段，并指定日期格式化 -->
+        <p><small>{{ comment.created_at|date:"Y-m-d H:i:s" }}</small></p>
+    </div>
+{% endfor %}
+

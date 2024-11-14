@@ -9,6 +9,10 @@ from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
+from .forms import AgriculturalProductForm
+import random  # 这不是必须的
+from .forms import CommentForm
+from django.utils.timezone import localtime
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = User
@@ -67,6 +71,7 @@ def recommendation_view(request):
     context = {'products': recommended_products}
     return render(request, 'myapp/recommendation.html', context)
 
+
 class ProductListView(ListView):
     model = AgriculturalProduct
     context_object_name = 'products'
@@ -97,3 +102,47 @@ def some_view(request):
 
 def home(request):
    return render(request, 'home.html',{'name': 'home'})
+
+def product_create(request):
+    if request.method == 'POST':
+        form = AgriculturalProductForm(request.POST, request.FILES)  # 添加 request.FILES
+        if form.is_valid():
+            form.save()
+            return redirect('product_list')  # 假设你有一个产品列表的 URL
+    else:
+        form = AgriculturalProductForm()
+    return render(request, 'product_form.html', {'form': form})
+
+
+def product_list(request):
+    categories = Category.objects.all()
+    products = list(AgriculturalProduct.objects.all())
+    random.shuffle(products)  # 随机排序
+
+    return render(request, 'your_template.html', {
+        'products': products,
+        'categories': categories
+    })
+
+def product_detail(request, pk):
+    product = get_object_or_404(AgriculturalProduct, pk=pk)
+    comments = product.comments.all()  # 获取该商品的所有评论
+
+
+    # 转换评论的创建时间为亚洲/上海时区的本地时间
+    for comment in comments:
+        comment.created_at = localtime(comment.created_at)
+
+    # 如果请求方法为POST，则尝试处理评论表单
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user  # 将当前登录的用户赋值给评论的user字段
+            comment.agricultural_product = product  # 将当前商品赋值给评论的商品字段
+            comment.save()
+            return redirect('product_detail', pk=pk)  # 提交成功后重定向回商品详情页
+    else:
+        form = CommentForm()
+
+    return render(request, 'products/product_detail.html', {'product': product, 'form': form, 'comments': comments})
