@@ -1,7 +1,7 @@
 {% extends 'home.html' %}
 
 {% block content %}
-<h2>Login</h2>
+<h2>登录</h2>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -48,6 +48,6 @@
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Login</button>
+  <button type="submit">登录</button>
 </form>
 {% endblock %}

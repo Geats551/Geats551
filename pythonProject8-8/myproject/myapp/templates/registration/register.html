@@ -1,7 +1,7 @@
 {% extends 'home.html' %}
 
 {% block content %}
-<h2>Register</h2>
+<h2>注册</h2>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -48,6 +48,6 @@
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Register</button>
+  <button type="submit">注册</button>
 </form>
 {% endblock %}

@@ -20,7 +20,7 @@
                 {% endif %}
                 <div class="card-body">
                     <p class="card-text">{{ product.description|truncatewords:30 }}</p>
-                    <p class="card-text">价格: {{ product.price|floatformat:2 }}</p>  <!-- 格式化价格 -->
+                    <p class="card-text">价格: {{ product.price|floatformat:2 }}元/斤</p>  <!-- 格式化价格 -->
                     <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
                 </div>
             </div>
