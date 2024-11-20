@@ -1,4 +1,6 @@
-<!-- products/product_list_snippet.html -->
+{% extends 'base.html' %}
+
+{% block content %}
 <div id="category-list">
     <ul>
     {% for category in categories %}
@@ -15,11 +17,11 @@
                 <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 200px;">
             {% endif %}
             <p>{{ product.description|truncatewords:50 }}</p>
-            <p>价格: {{ product.price }}</p>  <!-- 修改 Price 为 价格 -->
+            <p>价格: {{ product.price }}</p>
             <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
-            <!-- Add more details as needed -->
         </div>
     {% empty %}
-        <p>没有可用的产品。</p>  <!-- 修改 No products available 为 没有可用的产品 -->
+        <p>没有可用的产品。</p>
     {% endfor %}
 </div>
+{% endblock %}
