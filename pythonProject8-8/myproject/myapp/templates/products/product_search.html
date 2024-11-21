@@ -4,13 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>搜索产品</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* 简单样式以展示搜索建议 */
+        #suggestions {
+            border: 1px solid #ccc;
+            display: none; /* 默认隐藏 */
+            position: absolute;
+            background-color: white;
+            z-index: 1000;
+            width: calc(100% - 20px);
+        }
+        .suggestion-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
     <h1>搜索产品</h1>
     <form method="GET" action="{% url 'product_search' %}">
-        <input type="text" name="q" placeholder="输入产品名称..." value="{{ query }}">
+        <input type="text" id="search" name="q" placeholder="输入产品名称..." value="{{ query }}">
         <button type="submit">搜索</button>
     </form>
+
+    <div id="suggestions"></div> <!-- 用于展示搜索建议 -->
 
     <h2>搜索结果</h2>
     {% if products %}
@@ -25,5 +46,47 @@
     {% else %}
         <p>没有找到相关产品。</p>
     {% endif %}
+
+    <script>
+        $(document).ready(function(){
+            $('#search').on('input', function(){
+                var query = $(this).val();
+                if (query.length > 0) {
+                    $.ajax({
+                        url: "{% url 'product_suggestion' %}", // Django视图的URL
+                        data: {
+                            'q': query
+                        },
+                        success: function(data){
+                            $('#suggestions').empty(); // 清空之前的建议
+                            if (data.length > 0) {
+                                data.forEach(function(item){
+                                    $('#suggestions').append('<div class="suggestion-item">' + item.name + '</div>');
+                                });
+                                $('#suggestions').show(); // 显示建议
+                            } else {
+                                $('#suggestions').hide(); // 隐藏
+                            }
+                        }
+                    });
+                } else {
+                    $('#suggestions').hide(); // 隐藏
+                }
+            });
+
+            // 处理点击建议项事件
+            $(document).on('click', '.suggestion-item', function(){
+                $('#search').val($(this).text()); // 设置输入框内容
+                $('#suggestions').hide(); // 隐藏建议
+            });
+
+            // 防止点击后隐藏建议
+            $(document).on('click', function(e){
+                if (!$(e.target).closest('#suggestions').length && !$(e.target).is('#search')) {
+                    $('#suggestions').hide();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

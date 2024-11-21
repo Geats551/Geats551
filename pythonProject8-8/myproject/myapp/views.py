@@ -15,6 +15,7 @@ from django.utils.timezone import localtime
 import random  # 这不是必须的
 from random import sample
 from django.db.models import F
+from django.http import JsonResponse
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = User
@@ -181,3 +182,9 @@ def recommendation_view(request):
         'recommended_products': recommended_products,
         'categories': categories
     })
+
+def product_suggestion(request):
+    query = request.GET.get('q', '')
+    suggestions = AgriculturalProduct.objects.filter(name__icontains=query)[:5]  # 限制返回前5个结果
+    results = [{'id': product.id, 'name': product.name} for product in suggestions]
+    return JsonResponse(results, safe=False)
