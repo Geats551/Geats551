@@ -146,3 +146,12 @@ def product_detail(request, pk):
         form = CommentForm()
 
     return render(request, 'products/product_detail.html', {'product': product, 'form': form, 'comments': comments})
+
+def product_search(request):
+    query = request.GET.get('q')  # 获取搜索查询
+    products = AgriculturalProduct.objects.all()  # 获取所有产品
+
+    if query:
+        products = products.filter(name__icontains=query)  # 根据名称过滤产品
+
+    return render(request, 'products/product_search.html', {'products': products, 'query': query})

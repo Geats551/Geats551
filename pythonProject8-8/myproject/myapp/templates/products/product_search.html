@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索产品</title>
+</head>
+<body>
+    <h1>搜索产品</h1>
+    <form method="GET" action="{% url 'product_search' %}">
+        <input type="text" name="q" placeholder="输入产品名称..." value="{{ query }}">
+        <button type="submit">搜索</button>
+    </form>
+
+    <h2>搜索结果</h2>
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <li>
+                    <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+                    - {{ product.description }} - 价格: {{ product.price }} 元/斤
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>没有找到相关产品。</p>
+    {% endif %}
+</body>
+</html>
