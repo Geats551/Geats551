@@ -3,18 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>产品列表</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
+            color: #333;
+        }
+        div {
+            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        h2 a {
+            text-decoration: none;
+            color: inherit;
+        }
+        h2 a:hover {
+            text-decoration: underline;
+        }
+        img {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-
-<!-- 页面头部添加分类列表 -->
-<div id="category-list">
-    <ul>
-    {% for category in categories %}
-        <li><a href="{% url 'category_detail' pk=category.pk %}">{{ category.name }}</a></li>
-    {% endfor %}
-    </ul>
-</div>
 
 <!-- 显示产品信息 -->
 {% for product in products %}

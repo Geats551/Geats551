@@ -1,13 +1,70 @@
-<!-- 导入 Bootstrap CSS 样式表 -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>分类详情</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+        h2 {
+            font-size: 2em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+        /* 以下是模拟Bootstrap的样式 */
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .product-list {
+            margin-top: 20px;
+        }
+        .product-item {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .product-item h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .product-item img {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+        .product-item p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ category.name }}</h1>
+        <p>{{ category.description }}</p>
 
-<h1>{{ category.name }}</h1>
-<p>{{ category.description }}</p>
-
-{% if products %}
-    <h2>Products in this category:</h2>
-    <!-- Include the product listing part similar to product_list.html -->
-    {% include 'products/product_list_snippet.html' %}
-{% else %}
-    <p>No products in this category yet.</p>
-{% endif %}
+        {% if products %}
+            <h2>Products in this category:</h2>
+            <!-- Include the product listing part similar to product_list_snippet.html -->
+            {% include 'products/product_list_snippet.html' %}
+        {% else %}
+            <p>No products in this category yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

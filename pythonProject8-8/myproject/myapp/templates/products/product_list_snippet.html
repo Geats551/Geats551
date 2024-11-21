@@ -1,27 +1,103 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>产品列表</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
+            color: #333;
+        }
+        #category-list {
+            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+        #category-list li {
+            margin-bottom: 10px;
+        }
+        #category-list li a {
+            text-decoration: none;
+            color: #333;
+        }
+        #category-list li a:hover {
+            text-decoration: underline;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .product-item {
+            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(33.333% - 20px); /* 三列布局 */
+            box-sizing: border-box;
+        }
+        .product-item h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .product-item h3 a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .product-item h3 a:hover {
+            text-decoration: underline;
+        }
+        .product-item img {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+        .product-item p {
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            .product-item {
+                width: calc(50% - 20px); /* 两列布局 */
+            }
+        }
+        @media (max-width: 480px) {
+            .product-item {
+                width: 100%; /* 一列布局 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="category-list">
+        <ul>
+            {% for category in categories %}
+                <li><a href="{% url 'category_detail' pk=category.pk %}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 
-{% block content %}
-<div id="category-list">
-    <ul>
-    {% for category in categories %}
-        <li><a href="{% url 'category_detail' pk=category.pk %}">{{ category.name }}</a></li>
-    {% endfor %}
-    </ul>
-</div>
-
-<div class="product-list">
-    {% for product in products %}
-        <div class="product-item">
-            <h3><a href="{% url 'product_detail' pk=product.pk  %}">{{ product.name }}</a></h3>
-            {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 200px;">
-            {% endif %}
-            <p>{{ product.description|truncatewords:50 }}</p>
-            <p>价格: {{ product.price }}</p>
-            <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
-        </div>
-    {% empty %}
-        <p>没有可用的产品。</p>
-    {% endfor %}
-</div>
-{% endblock %}
+    <div class="product-list">
+        {% for product in products %}
+            <div class="product-item">
+                <h3><a href="{% url 'product_detail' pk=product.pk  %}">{{ product.name }}</a></h3>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 200px;">
+                {% endif %}
+                <p>{{ product.description|truncatewords:50 }}</p>
+                <p>价格: {{ product.price }}</p>
+                <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
+            </div>
+        {% empty %}
+            <p>没有可用的产品。</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
