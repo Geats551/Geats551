@@ -108,11 +108,18 @@
             </ul>
         </div>
 
-        <div class="row">
-            {% for product in products %}
+        <div class="container">
+
+    <div class="row">
+
+        {% if recommended_products and recommended_products.count > 0 %}
+            <!-- 如果推荐商品存在 -->
+            {% for product in recommended_products %}
                 <div class="col-md-4">
                     <div class="card">
-                        <h5 class="card-title"><a href="{% url 'product_detail' pk=product.pk  %}">{{ product.name }}</a></h5>
+                        <h5 class="card-title">
+                            <a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a>
+                        </h5>
                         {% if product.image %}
                             <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
                         {% endif %}
@@ -123,12 +130,35 @@
                         </div>
                     </div>
                 </div>
-            {% empty %}
-                <p>没有可用的产品。</p>
             {% endfor %}
-        </div>
-        <!-- 添加分隔线 -->
-        <hr>
+        {% else %}
+            {% if products.count > 0 %}
+                {% for product in products|slice:':5' %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <h5 class="card-title">
+                                <a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a>
+                            </h5>
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <p class="card-text">{{ product.description|truncatewords:30 }}</p>
+                                <p class="card-text">价格: {{ product.price|floatformat:2 }}元/斤</p>
+                                <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>目前没有商品可供显示。</p>
+            {% endif %}
+        {% endif %}
     </div>
+
+    <hr>
+</div>
+        <!-- 添加分隔线 -->
+
 </body>
 </html>

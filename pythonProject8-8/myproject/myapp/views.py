@@ -10,9 +10,11 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
 from .forms import AgriculturalProductForm
-import random  # 这不是必须的
 from .forms import CommentForm
 from django.utils.timezone import localtime
+import random  # 这不是必须的
+from random import sample
+from django.db.models import F
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = User
@@ -66,10 +68,7 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
-def recommendation_view(request):
-    recommended_products = AgriculturalProduct.objects.order_by('-id')[:5]  # 简单示例，按ID降序获取前5个产品作为推荐
-    context = {'products': recommended_products}
-    return render(request, 'myapp/recommendation.html', context)
+
 
 
 class ProductListView(ListView):
@@ -124,10 +123,24 @@ def product_list(request):
         'categories': categories
     })
 
+
+def product_search(request):
+    query = request.GET.get('q')  # 获取搜索查询
+    products = AgriculturalProduct.objects.all()  # 获取所有产品
+
+    if query:
+        products = products.filter(name__icontains=query)  # 根据名称过滤产品
+
+    return render(request, 'products/product_search.html', {'products': products, 'query': query})
+
+
 def product_detail(request, pk):
     product = get_object_or_404(AgriculturalProduct, pk=pk)
-    comments = product.comments.all()  # 获取该商品的所有评论
 
+    # Increment click_count
+    product.click_count += 1
+    product.save()
+    comments = product.comments.all()  # 获取该商品的所有评论
 
     # 转换评论的创建时间为亚洲/上海时区的本地时间
     for comment in comments:
@@ -147,11 +160,24 @@ def product_detail(request, pk):
 
     return render(request, 'products/product_detail.html', {'product': product, 'form': form, 'comments': comments})
 
-def product_search(request):
-    query = request.GET.get('q')  # 获取搜索查询
-    products = AgriculturalProduct.objects.all()  # 获取所有产品
 
-    if query:
-        products = products.filter(name__icontains=query)  # 根据名称过滤产品
+def recommendation_view(request):
+    products = AgriculturalProduct.objects.all()
 
-    return render(request, 'products/product_search.html', {'products': products, 'query': query})
+    # 示范用户点击次数最高的前5个商品
+    recommended_products = AgriculturalProduct.objects.order_by('-click_count')[:5]
+
+    # 如果没有推荐商品则随机选择5个商品
+    if recommended_products.count() == 0:
+        if products.count() > 5:
+            recommended_products = sample(list(products), 5)
+        else:
+            recommended_products = products
+
+    # 获取所有类别
+    categories = Category.objects.all()
+
+    return render(request, 'myapp/recommendation.html', {
+        'recommended_products': recommended_products,
+        'categories': categories
+    })
