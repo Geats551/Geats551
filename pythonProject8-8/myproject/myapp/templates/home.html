@@ -1,17 +1,45 @@
-<!-- base_generic.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>{% block title %}农产品推网{% endblock %}</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
+            color: #333;
+        }
+        p {
+            margin: 20px;
+        }
+        nav {
+            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        nav a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: #333;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
     <p>欢迎来到农产品推荐网</p>
     <nav>
         <!-- 其他导航元素 -->
-                    <a href="{% url 'register' %}">注册</a>
+        <a href="{% url 'register' %}">注册</a>
         {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">登录</a>
+            <a href="{% url 'logout' %}">登出</a>
         {% else %}
             <a href="{% url 'login' %}">登录</a>
         {% endif %}
