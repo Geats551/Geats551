@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}农产品推网{% endblock %}</title>
     <style>
         body {
@@ -12,37 +14,47 @@
         }
         p {
             margin: 20px;
+            text-align: center; /* 使文本居中 */
+            font-size: 1.5em; /* 增加文本大小 */
+            font-weight: 600; /* 增加文本加粗 */
         }
         nav {
-            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
-            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.9); /* 更加透明的背景 */
+            padding: 15px 25px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin: 20px 20px 10px; /* 显示四周的边距 */
+            display: flex; /* 水平布局 */
+            justify-content: center; /* 居中对齐 */
         }
         nav a {
-            margin-right: 20px;
+            margin-right: 25px;
+            padding: 10px 15px; /* 增加按钮内边距 */
+            border-radius: 5px;
             text-decoration: none;
             color: #333;
+            background: rgba(0, 123, 255, 0.8); /* 按钮背景 */
+            transition: background-color 0.3s, color 0.3s; /* 过渡效果 */
         }
         nav a:hover {
-            text-decoration: underline;
+            background: rgba(0, 123, 255, 1); /* 悬停时的背景色变化 */
+            color: white; /* 悬停时字体颜色变化 */
         }
         main {
             margin: 20px;
+            padding: 20px; /* 增加主内容区域内边距 */
+            background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+            border-radius: 10px; /* 让边角更加圆润 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
         }
     </style>
 </head>
 <body>
     <p>欢迎来到农产品推荐网</p>
     <nav>
-        <!-- 其他导航元素 -->
         <a href="{% url 'register' %}">注册</a>
-        {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">登出</a>
-        {% else %}
-            <a href="{% url 'login' %}">登录</a>
-        {% endif %}
+        <a href="{% url 'login' %}">登录</a>
+        <a href="{% url 'admin:index' %}">管理员</a>
     </nav>
     <main>
         {% block content %}{% endblock %}

@@ -188,3 +188,7 @@ def product_suggestion(request):
     suggestions = AgriculturalProduct.objects.filter(name__icontains=query)[:5]  # 限制返回前5个结果
     results = [{'id': product.id, 'name': product.name} for product in suggestions]
     return JsonResponse(results, safe=False)
+
+def about(request):
+   return render(request, 'about.html',{'name': 'about'})
+

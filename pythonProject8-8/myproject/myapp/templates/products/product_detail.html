@@ -53,13 +53,6 @@
     </style>
 </head>
 <body>
-    <!-- 商品详情部分 -->
-    <h1>{{ product.name }}</h1>
-    <p>{{ product.description }}</p>
-    <img src="{{ product.image.url }}" alt="{{ product.name }}">
-    <p>价格: {{ product.price }}</p>
-    <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
-
 
 <!-- 商品详情部分 -->
 <h1>{{ product.name }}</h1>
