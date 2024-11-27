@@ -1,43 +1,103 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <title>商品详情</title>
     <style>
+       .page-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px; /* 统一导航栏文字大小 */
+            font-weight: normal; /* 导航栏文字正常粗细 */
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        nav:hover {
+            background-color: #f4f5f6;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 20px;
-            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
+            padding: 0;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
             color: #333;
         }
+
         h1 {
             font-size: 2.5em;
             margin-bottom: 0.5em;
+            color: #333;
+            font-weight: bold; /* 标题加粗 */
         }
+
         p {
             margin-bottom: 1em;
+            line-height: 1.5;
+            color: #333;
+            font-size: 16px; /* 统一正文文字大小 */
+            font-weight: normal; /* 正文文字正常粗细 */
         }
+
         img {
             max-width: 200px;
             max-height: 200px;
             margin-top: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .comment {
+
+       .comment {
             background: #f8f9fa;
-            padding: 10px;
+            padding: 15px;
             border-radius: 4px;
             margin-top: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #333;
+            font-size: 16px;
+            font-weight: normal;
         }
-        .comment small {
+
+       .comment small {
             color: #666;
+            font-size: 14px; /* 调整小字体大小 */
+            font-weight: normal;
         }
+
         form {
             background: #fff;
             padding: 20px;
             border-radius: 4px;
             margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #333;
+            font-size: 16px;
+            font-weight: normal;
         }
+
         form button {
             background-color: #007bff;
             color: #fff;
@@ -46,36 +106,52 @@
             border-radius: 4px;
             cursor: pointer;
             margin-top: 10px;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            font-weight: normal;
         }
+
         form button:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
-<body>
 
-<!-- 商品详情部分 -->
-<h1>{{ product.name }}</h1>
-<p>{{ product.description }}</p>
- <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 200px;">
- <p>价格: {{ product.price }}</p>  <!-- 修改 Price 为 价格 -->
+<body>
+    <nav>
+        <a href="/">登出</a>
+        <a href="{% url 'profile' %}">个人信息</a>
+        <a href="{% url 'recommendation' %}">推荐商品</a>
+        <a href="{% url 'product_list' %}">所有商品</a>
+        <a href="{% url 'product_search' %}">搜索商品</a>
+        <a href="{% url 'admin:index' %}">管理员</a>
+        <a href="{% url 'about' %}">关于我们</a>
+    </nav>
+    <div class="page-container">
+        <!-- 商品详情部分 -->
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 200px;">
+        <p>价格: {{ product.price }}</p>
         <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
 
-    <!-- 评论表单 -->
-    <form method="post">
-        {% csrf_token %}
-        <label for="comment-text">评论:</label>
-        <textarea id="comment-text" name="text" rows="4" cols="50" required></textarea>
-        <button type="submit">提交评论</button>
-    </form>
+        <!-- 评论表单 -->
+        <form method="post">
+            {% csrf_token %}
+            <label for="comment-text">评论:</label>
+            <textarea id="comment-text" name="text" rows="4" cols="50" required></textarea>
+            <button type="submit">提交评论</button>
+        </form>
 
-    <!-- 显示已有评论 -->
-    <h2>已经有的评论：</h2>
-    {% for comment in comments %}
-        <div class="comment">
-            <p><strong>{{ comment.user.username }}:</strong> {{ comment.text }}</p>
-            <p><small>{{ comment.created_at|date:"Y-m-d H:i:s" }}</small></p>
-        </div>
-    {% endfor %}
+        <!-- 显示已有评论 -->
+        <h2>已经有的评论：</h2>
+        {% for comment in comments %}
+            <div class="comment">
+                <p>用户<strong>{{ comment.user.username }}评论：</strong> {{ comment.text }}</p>
+                <p><small>{{ comment.created_at|date:"Y-m-d H:i:s" }}</small></p>
+            </div>
+        {% endfor %}
+    </div>
 </body>
+
 </html>
