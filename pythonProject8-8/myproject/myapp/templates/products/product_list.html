@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <title>产品列表</title>
@@ -48,7 +49,7 @@
             margin: 0 15px; /* 增加类别项间距 */
         }
 
-        .product-container {
+       .product-container {
             display: flex; /* 使用Flexbox */
             flex-wrap: wrap; /* 允许换行 */
             justify-content: space-between; /* 在主轴方向上分布空白 */
@@ -57,13 +58,13 @@
             padding: 0 15px; /* 水平内边距 */
         }
 
-        .product-item {
+       .product-item {
             background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 20px 0; /* 上下间距 */
-            width: calc(50% - 30px); /* 每个商品占50%减去间距 */
+            width: calc(33.33% - 30px); /* 每个商品占33.33%减去间距 */
             box-sizing: border-box; /* 包含内边距与边框 */
         }
 
@@ -109,12 +110,13 @@
                 margin: 0 10px; /* 在小屏幕上减少边距 */
             }
 
-            .product-item {
+           .product-item {
                 width: 100%; /* 小屏幕上每个商品占100% */
             }
         }
     </style>
 </head>
+
 <body>
     <nav>
         <a href="/">登出</a>
@@ -139,14 +141,15 @@
         {% for product in products %}
             <div class="product-item">
                 <h2><a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a></h2>
-                <p>{{ product.description }}</p>
+                <p>{{ product.description }}</a></p>
                 {% if product.image %}
                     <img src="{{ product.image.url }}" alt="{{ product.name }}">
                 {% endif %}
-                <p>价格: {{ product.price }} 元/斤</p>  <!-- 修改 Price 为 价格 -->
+                <p>价格: {{ product.price }} 元/斤</p>
                 <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
             </div>
         {% endfor %}
     </div>
 </body>
+
 </html>

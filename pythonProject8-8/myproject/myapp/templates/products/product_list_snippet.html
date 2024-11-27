@@ -107,13 +107,14 @@
     <a href="{% url 'admin:index' %}">管理员</a>
     <a href="{% url 'about' %}">关于我们</a>
 </nav>
-    <div id="category-list">
-        <ul>
-            {% for category in categories %}
-                <li><a href="{% url 'category_detail' pk=category.pk %}">{{ category.name }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
+
+         <div id="category-list">
+            <ul>
+                {% for category in categories %}
+                    <li><a href="{% url 'category_detail' pk=category.pk %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
 
     <div class="product-list">
         {% for product in products %}
