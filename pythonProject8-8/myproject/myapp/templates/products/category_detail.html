@@ -55,13 +55,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>{{ category.name }}分类</h1>
+        <h1>{{ category.name }}</h1>
         <p>{{ category.description }}</p>
 
         {% if products %}
-
-            <h2></h2>
-
+            <h2>Products in this category:</h2>
             <!-- Include the product listing part similar to product_list_snippet.html -->
             {% include 'products/product_list_snippet.html' %}
         {% else %}
