@@ -12,7 +12,7 @@ from django.views.generic import ListView, DetailView
 from .forms import AgriculturalProductForm
 from .forms import CommentForm
 from django.utils.timezone import localtime
-import random  # 这不是必须的
+import random
 from random import sample
 from django.db.models import F
 from django.http import JsonResponse
@@ -165,13 +165,13 @@ def product_detail(request, pk):
 def recommendation_view(request):
     products = AgriculturalProduct.objects.all()
 
-    # 示范用户点击次数最高的前5个商品
-    recommended_products = AgriculturalProduct.objects.order_by('-click_count')[:5]
+    # 示范用户点击次数最高的前6个商品
+    recommended_products = AgriculturalProduct.objects.order_by('-click_count')[:6]
 
-    # 如果没有推荐商品则随机选择5个商品
+    # 如果没有推荐商品则随机选择6个商品
     if recommended_products.count() == 0:
-        if products.count() > 5:
-            recommended_products = sample(list(products), 5)
+        if products.count() > 6:
+            recommended_products = sample(list(products), 6)
         else:
             recommended_products = products
 

@@ -59,11 +59,13 @@
         <p>{{ category.description }}</p>
 
         {% if products %}
+
             <h2></h2>
+
             <!-- Include the product listing part similar to product_list_snippet.html -->
             {% include 'products/product_list_snippet.html' %}
         {% else %}
-            <p>没有该分类商品</p>
+            <p>No products in this category yet.</p>
         {% endif %}
     </div>
 </body>
