@@ -7,6 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>为您推荐的农产品</title>
     <style>
+        /* 设置整体字体为Arial */
+        body,
+        nav a,
+        h1,
+        h1::before,
+        #category-list li a,
+       .card-title a,
+       .card-text,
+        p {
+            font-family: 'Arial', sans-serif;
+        }
+
         nav {
             position: fixed;
             /* 使导航栏固定 */
@@ -33,6 +45,8 @@
             /* 不显示下划线 */
             color: #007bff;
             /* 链接颜色 */
+            font-weight: bold;
+            /* 加粗链接文本，与示例代码风格统一 */
         }
 
         nav a:hover {
@@ -41,10 +55,10 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #333;
         }
 
       .container {
@@ -59,7 +73,6 @@
 
         h1 {
             text-align: center;
-            color: #fff;
             font-size: 2.5em;
             margin-bottom: 20px;
             text-transform: uppercase;
@@ -113,7 +126,13 @@
 
       .card-title {
             margin-bottom: 10px;
-            text-align: center; /* 添加此行，使商品名称居中 */
+            text-align: center;
+        }
+
+      .card-title a {
+            text-align: center;
+            display: block;
+            width: 100%;
         }
 
       .card-text {
@@ -134,13 +153,6 @@
             padding-right: 15px;
             padding-left: 15px;
             margin-bottom: 20px;
-        }
-
-        /* 对商品名称链接也设置居中，确保整体效果 */
-      .card-title a {
-            text-align: center;
-            display: block; /* 使其成为块级元素，以便更好地控制样式 */
-            width: 100%;
         }
 
         hr {
@@ -227,7 +239,7 @@
             <hr>
         </div>
         <!-- 添加分隔线 -->
-     </div>
+    </div>
     </body>
 
 </html>

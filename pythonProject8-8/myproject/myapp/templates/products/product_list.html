@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <title>产品列表</title>
@@ -8,32 +9,48 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            /* 渐变背景 */
             color: #333;
-            padding-top: 60px; /* 为固定导航栏留出空间 */
+            padding-top: 60px;
+            /* 为固定导航栏留出空间 */
         }
 
         nav {
-            position: fixed; /* 使导航栏固定 */
-            top: 0; /* 距离页面顶部 0 像素 */
-            left: 0; /* 距离页面左侧 0 像素 */
-            width: 100%; /* 导航栏宽度100% */
-            background-color: #f8f9fa; /* 背景色 */
-            padding: 15px; /* 内边距 */
-            border-bottom: 1px solid #e0e0e0; /* 底部边框 */
-            z-index: 1000; /* 确保在其他内容之上 */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+            position: fixed;
+            /* 使导航栏固定 */
+            top: 0;
+            /* 距离页面顶部 0 像素 */
+            left: 0;
+            /* 距离页面左侧 0 像素 */
+            width: 100%;
+            /* 导航栏宽度100% */
+            background-color: #f8f9fa;
+            /* 背景色 */
+            padding: 15px;
+            /* 内边距 */
+            border-bottom: 1px solid #e0e0e0;
+            /* 底部边框 */
+            z-index: 1000;
+            /* 确保在其他内容之上 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* 添加阴影 */
         }
 
         nav a {
-            margin: 0 15px; /* 链接之间的间距 */
-            text-decoration: none; /* 不显示下划线 */
-            color: #007bff; /* 链接颜色 */
-            font-weight: bold; /* 加粗链接文本 */
+            margin: 0 15px;
+            /* 链接之间的间距 */
+            text-decoration: none;
+            /* 不显示下划线 */
+            color: #007bff;
+            /* 链接颜色 */
+            font-weight: bold;
+            /* 加粗链接文本 */
         }
 
         nav a:hover {
-            text-decoration: underline; /* 鼠标悬停时下划线效果 */
+            text-decoration: underline;
+            /* 鼠标悬停时下划线效果 */
         }
 
         #category-list ul {
@@ -41,80 +58,103 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            margin: 20px 0; /* 上下间距 */
+            margin: 20px 0;
+            /* 上下间距 */
         }
 
         #category-list li {
-            margin: 0 15px; /* 增加类别项间距 */
+            margin: 0 15px;
+            /* 增加类别项间距 */
         }
 
-        .product-container {
-            display: flex; /* 使用Flexbox */
-            flex-wrap: wrap; /* 允许换行 */
-            justify-content: space-between; /* 在主轴方向上分布空白 */
-            max-width: 1200px; /* 最大宽度 */
-            margin: 0 auto; /* 居中 */
-            padding: 0 15px; /* 水平内边距 */
+        /* 产品容器样式调整 */
+       .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
 
-        .product-item {
-            background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+        /* 商品项样式调整 */
+       .product-item {
+            background: rgba(255, 255, 255, 0.9);
+            /* 半透明背景 */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 20px 0; /* 上下间距 */
-            width: calc(50% - 30px); /* 每个商品占50%减去间距 */
-            box-sizing: border-box; /* 包含内边距与边框 */
+            margin: 20px 0;
+            /* 上下间距 */
+            width: calc(33.33% - 30px);
+            /* 每个商品占约33.33%减去间距，实现每行3个 */
+            box-sizing: border-box;
+            /* 包含内边距与边框 */
         }
 
         h2 {
             margin-top: 0;
             color: #007bff;
-            font-size: 1.5em; /* 调整标题大小 */
+            font-size: 1.5em;
+            /* 调整标题大小 */
         }
 
         h2 a {
             text-decoration: none;
-            color: inherit; /* 继承颜色 */
+            color: inherit;
+            /* 继承颜色 */
         }
 
         h2 a:hover {
-            text-decoration: underline; /* 悬停下划线 */
+            text-decoration: underline;
+            /* 悬停下划线 */
         }
 
         img {
-            max-width: 100%; /* 确保图片响应式宽度 */
-            height: auto; /* 自适应高度 */
-            border-radius: 4px; /* 图片边角 */
-            margin-top: 10px; /* 上间距 */
+            max-width: 100%;
+            /* 确保图片响应式宽度 */
+            height: auto;
+            /* 自适应高度 */
+            border-radius: 4px;
+            /* 图片边角 */
+            margin-top: 10px;
+            /* 上间距 */
         }
 
         p {
-            margin: 10px 0; /* 上下间距 */
-            line-height: 1.6; /* 增加行高 */
+            margin: 10px 0;
+            /* 上下间距 */
+            line-height: 1.6;
+            /* 增加行高 */
         }
 
         a {
-            color: #007bff; /* 链接颜色 */
-            text-decoration: none; /* 去掉下划线 */
+            color: #007bff;
+            /* 链接颜色 */
+            text-decoration: none;
+            /* 去掉下划线 */
         }
 
         a:hover {
-            text-decoration: underline; /* 悬停下划线 */
+            text-decoration: underline;
+            /* 悬停下划线 */
         }
 
         /* 响应式样式 */
         @media (max-width: 600px) {
             nav a {
-                margin: 0 10px; /* 在小屏幕上减少边距 */
+                margin: 0 10px;
+                /* 在小屏幕上减少边距 */
             }
 
-            .product-item {
-                width: 100%; /* 小屏幕上每个商品占100% */
+           .product-item {
+                width: 100%;
+                /* 小屏幕上每个商品占100% */
             }
         }
     </style>
 </head>
+
 <body>
     <nav>
         <a href="/">登出</a>
@@ -143,10 +183,11 @@
                 {% if product.image %}
                     <img src="{{ product.image.url }}" alt="{{ product.name }}">
                 {% endif %}
-                <p>价格: {{ product.price }} 元/斤</p>  <!-- 修改 Price 为 价格 -->
+                <p>价格: {{ product.price }} 元/斤</p>
                 <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
             </div>
         {% endfor %}
     </div>
 </body>
+
 </html>
