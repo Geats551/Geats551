@@ -1,48 +1,62 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>为您推荐的农产品</title>
     <style>
-
         nav {
-            position: fixed; /* 使导航栏固定 */
-            top: 0;          /* 距离页面顶部 0 像素 */
-            left: 0;         /* 距离页面左侧 0 像素 */
-            width: 100%;     /* 导航栏宽度100% */
-            background-color: #f8f9fa; /* 背景色 */
-            padding: 10px;   /* 内边距 */
-            border-bottom: 1px solid #e0e0e0; /* 底部边框 */
-            z-index: 1000;   /* 确保在其他内容之上 */
+            position: fixed;
+            /* 使导航栏固定 */
+            top: 0;
+            /* 距离页面顶部 0 像素 */
+            left: 0;
+            /* 距离页面左侧 0 像素 */
+            width: 100%;
+            /* 导航栏宽度100% */
+            background-color: #f8f9fa;
+            /* 背景色 */
+            padding: 10px;
+            /* 内边距 */
+            border-bottom: 1px solid #e0e0e0;
+            /* 底部边框 */
+            z-index: 1000;
+            /* 确保在其他内容之上 */
         }
 
         nav a {
-            margin: 0 15px;   /* 链接之间的间距 */
-            text-decoration: none; /* 不显示下划线 */
-            color: #007bff;    /* 链接颜色 */
+            margin: 0 15px;
+            /* 链接之间的间距 */
+            text-decoration: none;
+            /* 不显示下划线 */
+            color: #007bff;
+            /* 链接颜色 */
         }
 
         nav a:hover {
-            text-decoration: underline; /* 鼠标悬停时下划线效果 */
+            text-decoration: underline;
+            /* 鼠标悬停时下划线效果 */
         }
+
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(to right, #ff7e5f, #feb47b);
         }
-        .container {
+
+      .container {
             width: 90%;
             margin: auto;
             overflow: hidden;
             padding: 20px;
             background: #fff;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
             text-align: center;
             color: #fff;
@@ -56,6 +70,7 @@
             background-clip: text;
             color: transparent;
         }
+
         h1::before {
             content: '';
             position: absolute;
@@ -66,49 +81,68 @@
             background-color: #ff6600;
             transform: translateX(-50%);
         }
+
         #category-list ul {
             list-style: none;
             padding: 0;
             display: flex;
             justify-content: center;
         }
+
         #category-list li {
             margin-right: 10px;
         }
-        .card {
+
+      .card {
             background: #fff;
             border: 1px solid #ddd;
             border-radius: 4px;
             margin-bottom: 20px;
         }
-        .card-img-top {
+
+      .card-img-top {
             width: 100%;
             height: auto;
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
         }
-        .card-body {
+
+      .card-body {
             padding: 15px;
         }
-        .card-title {
+
+      .card-title {
             margin-bottom: 10px;
+            text-align: center; /* 添加此行，使商品名称居中 */
         }
-        .card-text {
+
+      .card-text {
             font-size: 14px;
             color: #666;
         }
-        .row {
+
+      .row {
             display: flex;
             flex-wrap: wrap;
             margin-right: -15px;
             margin-left: -15px;
         }
-        .col-md-4 {
-            flex: 0 0 33.333333%;
-            max-width: 33.333333%;
+
+      .col-md-3 {
+            flex: 0 0 30%;
+            max-width: 30%;
             padding-right: 15px;
             padding-left: 15px;
+            margin-bottom: 20px;
         }
+
+        /* 对商品名称链接也设置居中，确保整体效果 */
+      .card-title a {
+            text-align: center;
+            display: block; /* 使其成为块级元素，以便更好地控制样式 */
+            width: 100%;
+        }
+
         hr {
             border: 0;
             height: 1px;
@@ -118,17 +152,18 @@
     </style>
 
 </head>
+
 <body>
 
-<nav>
-    <a href="/">登出</a>
-    <a href="{% url 'profile' %}">个人信息</a>
-    <a href="{% url 'recommendation' %}">推荐商品</a>
-    <a href="{% url 'product_list' %}">所有商品</a>
-    <a href="{% url 'product_search' %}">搜索商品</a>
-    <a href="{% url 'admin:index' %}">管理员</a>
-    <a href="{% url 'about' %}">关于我们</a>
-</nav>
+    <nav>
+        <a href="/">登出</a>
+        <a href="{% url 'profile' %}">个人信息</a>
+        <a href="{% url 'recommendation' %}">推荐商品</a>
+        <a href="{% url 'product_list' %}">所有商品</a>
+        <a href="{% url 'product_search' %}">搜索商品</a>
+        <a href="{% url 'admin:index' %}">管理员</a>
+        <a href="{% url 'about' %}">关于我们</a>
+    </nav>
     <div class="container">
         <h1>为您推荐的农产品</h1>
         <div id="category-list">
@@ -142,56 +177,57 @@
 
         <div class="container">
 
-    <div class="row">
+            <div class="row">
 
-        {% if recommended_products and recommended_products.count > 0 %}
-            <!-- 如果推荐商品存在 -->
-            {% for product in recommended_products %}
-                <div class="col-md-4">
-                    <div class="card">
-                        <h5 class="card-title">
-                            <a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a>
-                        </h5>
-                        {% if product.image %}
-                            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                        {% endif %}
-                        <div class="card-body">
-                            <p class="card-text">{{ product.description|truncatewords:30 }}</p>
-                            <p class="card-text">价格: {{ product.price|floatformat:2 }}元/斤</p>
-                            <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            {% if products.count > 0 %}
-                {% for product in products|slice:':5' %}
-                    <div class="col-md-4">
-                        <div class="card">
-                            <h5 class="card-title">
-                                <a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a>
-                            </h5>
-                            {% if product.image %}
-                                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                            {% endif %}
-                            <div class="card-body">
-                                <p class="card-text">{{ product.description|truncatewords:30 }}</p>
-                                <p class="card-text">价格: {{ product.price|floatformat:2 }}元/斤</p>
-                                <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
+                {% if recommended_products and recommended_products.count > 0 %}
+                    <!-- 如果推荐商品存在 -->
+                    {% for product in recommended_products %}
+                        <div class="col-md-3">
+                            <div class="card">
+                                <h5 class="card-title">
+                                    <a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a>
+                                </h5>
+                                {% if product.image %}
+                                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                                {% endif %}
+                                <div class="card-body">
+                                    <p class="card-text">{{ product.description|truncatewords:30 }}</p>
+                                    <p class="card-text">价格: {{ product.price|floatformat:2 }}元/斤</p>
+                                    <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>目前没有商品可供显示。</p>
-            {% endif %}
-        {% endif %}
-    </div>
+                    {% endfor %}
+                {% else %}
+                    {% if products.count > 0 %}
+                        {% for product in products|slice:':5' %}
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <h5 class="card-title">
+                                        <a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a>
+                                    </h5>
+                                    {% if product.image %}
+                                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                                    </h5>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <p class="card-text">{{ product.description|truncatewords:30 }}</p>
+                                        <p class="card-text">价格: {{ product.price|floatformat:2 }}元/斤</p>
+                                        <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>目前没有商品可供显示。</p>
+                    {% endif %}
+                {% endif %}
+            </div>
 
-    <hr>
-</div>
+            <hr>
+        </div>
         <!-- 添加分隔线 -->
 
-</body>
-</html>
+    </body>
 
+</html>
