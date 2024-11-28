@@ -6,8 +6,6 @@
     <title>搜索产品</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-<<<<<<< HEAD
-=======
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
@@ -16,7 +14,6 @@
             color: #333;
         }
 
->>>>>>> aee73292d7b8941f812bbb7a2a80572c905278f8
         nav {
             position: fixed;
             top: 0;
@@ -39,26 +36,6 @@
             text-decoration: underline;
         }
 
-<<<<<<< HEAD
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-
-        .container {
-            background-color: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 60px; /* 留出导航栏的空间 */
-        }
-
-        h1 {
-            text-align: center;
-=======
         .container {
             background-color: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
             padding: 40px 20px; /* 增加上下内边距 */
@@ -69,7 +46,6 @@
         }
 
         h1 {
->>>>>>> aee73292d7b8941f812bbb7a2a80572c905278f8
             font-size: 2.5em;
             margin-bottom: 20px;
         }
@@ -118,17 +94,10 @@
             background-color: white;
             text-align: left; /* 文本左对齐 */
             z-index: 1000;
-<<<<<<< HEAD
-            text-align: center; /* 使内容居中 */
-            width: 300px; /* 宽度与输入框一致 */
-            margin: 0 auto; /*水平居中 */
-            border-radius: 0 0 4px 4px;
-=======
             width: 400px; /* 宽度与输入框一致 */
             margin-top: 5px; /* 适当的上下间距 */
             border: 1px solid #ccc;
-            border-radius: 4px;
->>>>>>> aee73292d7b8941f812bbb7a2a80572c905278f8
+            border-radius: 0 0 4px 4px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             left: 50%; /* 将外边距设置为50% */
             transform: translateX(-50%); /* 向左移动自身宽度的一半 */
@@ -147,11 +116,7 @@
         h2 {
             margin-top: 40px;
             color: #333;
-<<<<<<< HEAD
-            text-align: center;
-=======
             font-size: 2em;
->>>>>>> aee73292d7b8941f812bbb7a2a80572c905278f8
         }
 
         ul {
@@ -185,11 +150,7 @@
 
         p {
             color: #666;
-<<<<<<< HEAD
-            text-align: center;
-=======
             margin-top: 15px;
->>>>>>> aee73292d7b8941f812bbb7a2a80572c905278f8
         }
     </style>
 </head>
@@ -205,22 +166,14 @@
     </nav>
     <div class="container">
         <h1>搜索产品</h1>
-<<<<<<< HEAD
-        <form method="GET" action="{% url 'product_search' %}">
-            <input type="text" id="search" name="q" placeholder="输入产品名称..." value="{{ query }}">
-            <button type="submit">搜索</button>
-        </form>
-
-        <div id="suggestions"></div> <!-- 用于展示搜索建议 -->
-
-=======
         <div class="search-container">
-            <input type="text" id="search" name="q" placeholder="输入产品名称..." value="{{ query }}">
-            <button type="submit">搜索</button>
+            <form method="GET" action="{% url 'product_search' %}">
+                <input type="text" id="search" name="q" placeholder="输入产品名称..." value="{{ query }}">
+                <button type="submit">搜索</button>
+            </form>
             <div id="suggestions"></div> <!-- 用于展示搜索建议 -->
         </div>
 
->>>>>>> aee73292d7b8941f812bbb7a2a80572c905278f8
         <h2>搜索结果</h2>
         {% if products %}
             <ul>
