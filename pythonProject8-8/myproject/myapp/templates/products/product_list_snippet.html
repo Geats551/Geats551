@@ -12,14 +12,15 @@
             color: #333;
             display: flex;
             justify-content: center; /* 居中内容 */
-            padding: 20px; /* 页面内边距 */
         }
         .container {
             max-width: 1200px; /* 限制最大宽度 */
             width: 100%;
+            padding: 20px; /* 页面内边距 */
+            box-sizing: border-box; /* 包括内边距在内的计算 */
         }
         #category-list {
-            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -32,29 +33,36 @@
         }
         #category-list li a {
             text-decoration: none;
-            color: #007bff; /* 使用统一的蓝色 */
+            color: #007bff; /* 统一蓝色 */
+            font-weight: bold; /* 加粗链接文本 */
+            transition: color 0.3s; /* 颜色过渡效果 */
         }
         #category-list li a:hover {
             text-decoration: underline;
+            color: #0056b3; /* 悬停时改变颜色 */
         }
         .product-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
+            gap: 20px; /* 增加产品之间的间距 */
         }
         .product-item {
-            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 加深阴影效果 */
             width: calc(33.333% - 20px); /* 三列布局 */
             box-sizing: border-box;
             text-align: center; /* 内容居中 */
+            transition: transform 0.2s; /* 添加悬停效果 */
+        }
+        .product-item:hover {
+            transform: translateY(-5px); /* 悬停时稍微抬起效果 */
         }
         .product-item h3 {
-            margin-top: 0;
+            margin-top: 10px; /* 调整标题上边距 */
             color: #007bff;
+            font-size: 1.5em; /* 增大标题字体 */
         }
         .product-item h3 a {
             text-decoration: none;
@@ -64,14 +72,15 @@
             text-decoration: underline;
         }
         .product-item img {
-            max-width: 200px;
-            max-height: 200px;
-            margin-top: 10px;
+            max-width: 100%; /* 适应父容器宽度 */
+            max-height: 150px; /* 限制图片最大高度 */
+            margin: 10px auto; /* 增加上下间距，居中显示 */
             border-radius: 8px; /* 图片圆角 */
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* 图片阴影 */
         }
         .product-item p {
-            margin: 10px 0;
+            margin: 10px 0; /* 调整描述的上下间距 */
+            line-height: 1.5; /* 增加行高，提高可读性 */
         }
         @media (max-width: 768px) {
             .product-item {
@@ -81,6 +90,7 @@
         @media (max-width: 480px) {
             .product-item {
                 width: 100%; /* 一列布局 */
+                padding: 10px; /* 缩减内边距以适应小屏幕 */
             }
         }
     </style>
