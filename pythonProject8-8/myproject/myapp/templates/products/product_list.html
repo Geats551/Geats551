@@ -16,7 +16,7 @@
             /* 为固定导航栏留出空间 */
         }
 
-        nav {
+         nav {
             position: fixed;
             /* 使导航栏固定 */
             top: 0;
@@ -27,14 +27,12 @@
             /* 导航栏宽度100% */
             background-color: #f8f9fa;
             /* 背景色 */
-            padding: 15px;
+            padding: 10px;
             /* 内边距 */
             border-bottom: 1px solid #e0e0e0;
             /* 底部边框 */
             z-index: 1000;
             /* 确保在其他内容之上 */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            /* 添加阴影 */
         }
 
         nav a {
@@ -45,7 +43,7 @@
             color: #007bff;
             /* 链接颜色 */
             font-weight: bold;
-            /* 加粗链接文本 */
+            /* 加粗链接文本，与示例代码风格统一 */
         }
 
         nav a:hover {
@@ -156,7 +154,7 @@
 </head>
 
 <body>
-    <nav>
+     <nav>
         <a href="/">登出</a>
         <a href="{% url 'profile' %}">个人信息</a>
         <a href="{% url 'recommendation' %}">推荐商品</a>
@@ -165,7 +163,6 @@
         <a href="{% url 'admin:index' %}">管理员</a>
         <a href="{% url 'about' %}">关于我们</a>
     </nav>
-
     <div id="category-list">
         <ul>
             {% for category in categories %}

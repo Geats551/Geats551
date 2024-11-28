@@ -2,9 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Team Members</title>
+    <style>
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            z-index: 1000;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 60px; /* To avoid overlap with the fixed navbar */
+        }
+
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-这是我们的成员：
+
+    <nav>
+        <a href="/">登出</a>
+        <a href="{% url 'profile' %}">个人信息</a>
+        <a href="{% url 'recommendation' %}">推荐商品</a>
+        <a href="{% url 'product_list' %}">所有商品</a>
+        <a href="{% url 'product_search' %}">搜索商品</a>
+        <a href="{% url 'admin:index' %}">管理员</a>
+        <a href="{% url 'about' %}">关于我们</a>
+    </nav>
+
+    <table>
+        <thead>
+            <tr>
+                <th>角色</th>
+                <th>姓名</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>组长</td>
+                <td>朱洲林</td>
+            </tr>
+            <tr>
+                <td>组员</td>
+                <td>吕青林</td>
+            </tr>
+            <tr>
+                <td>组员</td>
+                <td>王玉谷</td>
+            </tr>
+            <tr>
+                <td>组员</td>
+                <td>杨谨语</td>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
 </html>

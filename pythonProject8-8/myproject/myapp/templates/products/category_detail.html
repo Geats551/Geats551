@@ -99,15 +99,15 @@
         <a href="{% url 'about' %}">关于我们</a>
     </nav>
     <div class="container">
-        <h1>{{ category.name }}</h1>
+        <h1>{{ category.name }}分类</h1>
         <p>{{ category.description }}</p>
 
         {% if products %}
-            <h2>Products in this category:</h2>
+
             <!-- Include the product listing part similar to product_list_snippet.html -->
             {% include 'products/product_list_snippet.html' %}
         {% else %}
-            <p>No products in this category yet.</p>
+            <p>没有农产品展示</p>
         {% endif %}
     </div>
 </body>
