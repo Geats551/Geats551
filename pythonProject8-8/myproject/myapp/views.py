@@ -44,7 +44,7 @@ def register_view(request):
             user = form.save()
             # 登录新用户
             login(request, user)
-            return redirect('base')  #
+            return redirect('login')  #
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
