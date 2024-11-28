@@ -4,6 +4,41 @@
     <meta charset="UTF-8">
     <title>商品详情</title>
     <style>
+
+        nav {
+            position: fixed;
+            /* 使导航栏固定 */
+            top: 0;
+            /* 距离页面顶部 0 像素 */
+            left: 0;
+            /* 距离页面左侧 0 像素 */
+            width: 100%;
+            /* 导航栏宽度100% */
+            background-color: #f8f9fa;
+            /* 背景色 */
+            padding: 10px;
+            /* 内边距 */
+            border-bottom: 1px solid #e0e0e0;
+            /* 底部边框 */
+            z-index: 1000;
+            /* 确保在其他内容之上 */
+        }
+
+        nav a {
+            margin: 0 15px;
+            /* 链接之间的间距 */
+            text-decoration: none;
+            /* 不显示下划线 */
+            color: #007bff;
+            /* 链接颜色 */
+            font-weight: bold;
+            /* 加粗链接文本，与示例代码风格统一 */
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+            /* 鼠标悬停时下划线效果 */
+        }
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -86,7 +121,15 @@
     </style>
 </head>
 <body>
-
+    <nav>
+        <a href="/">登出</a>
+        <a href="{% url 'profile' %}">个人信息</a>
+        <a href="{% url 'recommendation' %}">推荐商品</a>
+        <a href="{% url 'product_list' %}">所有商品</a>
+        <a href="{% url 'product_search' %}">搜索商品</a>
+        <a href="{% url 'admin:index' %}">管理员</a>
+        <a href="{% url 'about' %}">关于我们</a>
+    </nav>
 <div class="container">
     <!-- 商品详情部分 -->
     <div class="product-info">
