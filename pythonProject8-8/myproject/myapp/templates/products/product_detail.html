@@ -10,18 +10,41 @@
             padding: 20px;
             background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
             color: #333;
+            display: flex;
+            justify-content: center; /* 居中内容 */
+        }
+        .container {
+            display: flex;
+            max-width: 1200px; /* 限制最大宽度 */
+            width: 100%; /* 使内容占满宽度 */
+            gap: 20px; /* 两个部分的间距 */
+        }
+        .product-info {
+            flex: 1; /* 左侧区域占用一定空间 */
+            max-width: 60%; /* 设置最大宽度为60% */
+            background: #ffffff; /* 背景色 */
+            border-radius: 8px; /* 圆角边框 */
+            padding: 20px; /* 内边距 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+            display: flex;
+            flex-direction: column; /* 竖向排列 */
+            align-items: center; /* 水平居中内容 */
         }
         h1 {
             font-size: 2.5em;
             margin-bottom: 0.5em;
+            text-align: center; /* 标题居中 */
         }
         p {
             margin-bottom: 1em;
+            text-align: center; /* 段落居中 */
         }
         img {
-            max-width: 200px;
-            max-height: 200px;
+            max-width: 100%; /* 自适应宽度 */
+            max-height: 600px;
             margin-top: 10px;
+            border-radius: 8px; /* 图片圆角 */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* 图片阴影 */
         }
         .comment {
             background: #f8f9fa;
@@ -32,11 +55,20 @@
         .comment small {
             color: #666;
         }
+        .comments-section {
+            flex: 1; /* 右侧区域占用一定空间 */
+            max-width: 35%; /* 设置最大宽度为35% */
+            background: #ffffff; /* 背景色 */
+            border-radius: 8px; /* 圆角边框 */
+            padding: 20px; /* 内边距 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+        }
         form {
             background: #fff;
             padding: 20px;
             border-radius: 4px;
             margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影效果 */
         }
         form button {
             background-color: #007bff;
@@ -46,6 +78,7 @@
             border-radius: 4px;
             cursor: pointer;
             margin-top: 10px;
+            transition: background-color 0.3s; /* 添加过渡效果 */
         }
         form button:hover {
             background-color: #0056b3;
@@ -54,28 +87,36 @@
 </head>
 <body>
 
-<!-- 商品详情部分 -->
-<h1>{{ product.name }}</h1>
-<p>{{ product.description }}</p>
- <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 200px;">
- <p>价格: {{ product.price }}</p>  <!-- 修改 Price 为 价格 -->
+<div class="container">
+    <!-- 商品详情部分 -->
+    <div class="product-info">
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <p>价格: {{ product.price }}元/斤</p> <!-- 修改 Price 为 价格 -->
         <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
+    </div>
 
-    <!-- 评论表单 -->
-    <form method="post">
-        {% csrf_token %}
-        <label for="comment-text">评论:</label>
-        <textarea id="comment-text" name="text" rows="4" cols="50" required></textarea>
-        <button type="submit">提交评论</button>
-    </form>
+    <!-- 评论部分 -->
+    <div class="comments-section">
+        <!-- 评论表单 -->
+        <form method="post">
+            {% csrf_token %}
+            <label for="comment-text">评论:</label>
+            <textarea id="comment-text" name="text" rows="4" cols="50" required></textarea>
+            <button type="submit">提交评论</button>
+        </form>
 
-    <!-- 显示已有评论 -->
-    <h2>已经有的评论：</h2>
-    {% for comment in comments %}
-        <div class="comment">
-            <p><strong>{{ comment.user.username }}:</strong> {{ comment.text }}</p>
-            <p><small>{{ comment.created_at|date:"Y-m-d H:i:s" }}</small></p>
-        </div>
-    {% endfor %}
+        <!-- 显示已有评论 -->
+        <h2>已经有的评论：</h2>
+        {% for comment in comments %}
+            <div class="comment">
+                <p><strong>{{ comment.user.username }}:</strong> {{ comment.text }}</p>
+                <p><small>{{ comment.created_at|date:"Y-m-d H:i:s" }}</small></p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
 </body>
 </html>

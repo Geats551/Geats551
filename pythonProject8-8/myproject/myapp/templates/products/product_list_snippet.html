@@ -10,6 +10,13 @@
             padding: 0;
             background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
             color: #333;
+            display: flex;
+            justify-content: center; /* 居中内容 */
+            padding: 20px; /* 页面内边距 */
+        }
+        .container {
+            max-width: 1200px; /* 限制最大宽度 */
+            width: 100%;
         }
         #category-list {
             background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
@@ -25,7 +32,7 @@
         }
         #category-list li a {
             text-decoration: none;
-            color: #333;
+            color: #007bff; /* 使用统一的蓝色 */
         }
         #category-list li a:hover {
             text-decoration: underline;
@@ -43,6 +50,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: calc(33.333% - 20px); /* 三列布局 */
             box-sizing: border-box;
+            text-align: center; /* 内容居中 */
         }
         .product-item h3 {
             margin-top: 0;
@@ -59,6 +67,8 @@
             max-width: 200px;
             max-height: 200px;
             margin-top: 10px;
+            border-radius: 8px; /* 图片圆角 */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* 图片阴影 */
         }
         .product-item p {
             margin: 10px 0;
@@ -76,28 +86,30 @@
     </style>
 </head>
 <body>
-    <div id="category-list">
-        <ul>
-            {% for category in categories %}
-                <li><a href="{% url 'category_detail' pk=category.pk %}">{{ category.name }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
+    <div class="container">
+        <div id="category-list">
+            <ul>
+                {% for category in categories %}
+                    <li><a href="{% url 'category_detail' pk=category.pk %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
 
-    <div class="product-list">
-        {% for product in products %}
-            <div class="product-item">
-                <h3><a href="{% url 'product_detail' pk=product.pk  %}">{{ product.name }}</a></h3>
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 200px;">
-                {% endif %}
-                <p>{{ product.description|truncatewords:50 }}</p>
-                <p>价格: {{ product.price }}</p>
-                <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
-            </div>
-        {% empty %}
-            <p>没有可用的产品。</p>
-        {% endfor %}
+        <div class="product-list">
+            {% for product in products %}
+                <div class="product-item">
+                    <h3><a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a></h3>
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% endif %}
+                    <p>{{ product.description|truncatewords:50 }}</p>
+                    <p>价格: {{ product.price }}元/斤</p>
+                    <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
+                </div>
+            {% empty %}
+                <p>没有可用的产品。</p>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>
