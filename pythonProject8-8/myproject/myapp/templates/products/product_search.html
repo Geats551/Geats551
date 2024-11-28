@@ -4,53 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>搜索产品</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-
         nav {
             position: fixed;
-            /* 使导航栏固定 */
             top: 0;
-            /* 距离页面顶部 0 像素 */
             left: 0;
-            /* 距离页面左侧 0 像素 */
             width: 100%;
-            /* 导航栏宽度100% */
             background-color: #f8f9fa;
-            /* 背景色 */
             padding: 10px;
-            /* 内边距 */
             border-bottom: 1px solid #e0e0e0;
-            /* 底部边框 */
             z-index: 1000;
-            /* 确保在其他内容之上 */
         }
 
         nav a {
             margin: 0 15px;
-            /* 链接之间的间距 */
             text-decoration: none;
-            /* 不显示下划线 */
             color: #007bff;
-            /* 链接颜色 */
             font-weight: bold;
-            /* 加粗链接文本，与示例代码风格统一 */
         }
 
         nav a:hover {
             text-decoration: underline;
-            /* 鼠标悬停时下划线效果 */
         }
+
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
             margin: 0;
             padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 60px; /* 留出导航栏的空间 */
         }
 
         h1 {
             text-align: center;
+            font-size: 2.5em;
             margin-bottom: 20px;
-            color: #333;
         }
 
         form {
@@ -90,10 +87,13 @@
             position: absolute;
             background-color: white;
             z-index: 1000;
-            width: calc(300px + 20px); /* 与输入框宽度相匹配 */
-            margin-top: -1px; /* 使建议框与输入框连接 */
+            text-align: center; /* 使内容居中 */
+            width: 300px; /* 宽度与输入框一致 */
+            margin: 0 auto; /*水平居中 */
             border-radius: 0 0 4px 4px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            left: 50%; /* 将外边距设置为50% */
+            transform: translateX(-50%); /* 向左移动自身宽度的一半 */
         }
 
         .suggestion-item {
@@ -109,6 +109,7 @@
         h2 {
             margin-top: 40px;
             color: #333;
+            text-align: center;
         }
 
         ul {
@@ -118,10 +119,10 @@
 
         li {
             padding: 10px;
+            background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 4px;
             margin-bottom: 10px;
-            background-color: #fff;
             transition: box-shadow 0.3s;
         }
 
@@ -141,6 +142,7 @@
 
         p {
             color: #666;
+            text-align: center;
         }
     </style>
 </head>
@@ -154,27 +156,29 @@
         <a href="{% url 'admin:index' %}">管理员</a>
         <a href="{% url 'about' %}">关于我们</a>
     </nav>
-    <h1>搜索产品</h1>
-    <form method="GET" action="{% url 'product_search' %}">
-        <input type="text" id="search" name="q" placeholder="输入产品名称..." value="{{ query }}">
-        <button type="submit">搜索</button>
-    </form>
+    <div class="container">
+        <h1>搜索产品</h1>
+        <form method="GET" action="{% url 'product_search' %}">
+            <input type="text" id="search" name="q" placeholder="输入产品名称..." value="{{ query }}">
+            <button type="submit">搜索</button>
+        </form>
 
-    <div id="suggestions"></div> <!-- 用于展示搜索建议 -->
+        <div id="suggestions"></div> <!-- 用于展示搜索建议 -->
 
-    <h2>搜索结果</h2>
-    {% if products %}
-        <ul>
-            {% for product in products %}
-                <li>
-                    <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
-                    - {{ product.description }} - 价格: {{ product.price }} 元/斤
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>没有找到相关产品。</p>
-    {% endif %}
+        <h2>搜索结果</h2>
+        {% if products %}
+            <ul>
+                {% for product in products %}
+                    <li>
+                        <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+                        - {{ product.description }} - 价格: {{ product.price }} 元/斤
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>没有找到相关产品。</p>
+        {% endif %}
+    </div>
 
     <script>
         $(document).ready(function(){
