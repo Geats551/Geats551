@@ -6,6 +6,14 @@
     <title>搜索产品</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
         nav {
             position: fixed;
             top: 0;
@@ -28,46 +36,44 @@
             text-decoration: underline;
         }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 渐变背景 */
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-
         .container {
             background-color: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
-            padding: 20px;
+            padding: 40px 20px; /* 增加上下内边距 */
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 60px; /* 留出导航栏的空间 */
+            text-align: center; /* 将文本居中 */
         }
 
         h1 {
-            text-align: center;
             font-size: 2.5em;
             margin-bottom: 20px;
         }
 
-        form {
+        .search-container {
             display: flex;
-            justify-content: center;
+            justify-content: center; /* 水平居中 */
             margin-bottom: 20px;
+            position: relative; /* 使搜索框绝对定位建议 */
         }
 
         input[type="text"] {
-            width: 300px;
+            width: 400px; /* 输入框宽度 */
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff; /* 聚焦时边框颜色 */
+            outline: none; /* 去掉默认的轮廓 */
         }
 
         button {
             padding: 10px 15px;
-            margin-left: 10px;
             border: none;
             border-radius: 4px;
             background-color: #007bff;
@@ -75,6 +81,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-left: 10px; /* 按钮与输入框间距 */
         }
 
         button:hover {
@@ -82,18 +89,16 @@
         }
 
         #suggestions {
-            border: 1px solid #ccc;
-            display: none; /* 默认隐藏 */
+            display: none; /* 默认隐藏建议 */
             position: absolute;
             background-color: white;
+            text-align: left; /* 文本左对齐 */
             z-index: 1000;
-            text-align: center; /* 使内容居中 */
-            width: 300px; /* 宽度与输入框一致 */
-            margin: 0 auto; /*水平居中 */
-            border-radius: 0 0 4px 4px;
+            width: 400px; /* 宽度与输入框一致 */
+            margin-top: 5px; /* 适当的上下间距 */
+            border: 1px solid #ccc;
+            border-radius: 4px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            left: 50%; /* 将外边距设置为50% */
-            transform: translateX(-50%); /* 向左移动自身宽度的一半 */
         }
 
         .suggestion-item {
@@ -109,12 +114,13 @@
         h2 {
             margin-top: 40px;
             color: #333;
-            text-align: center;
+            font-size: 2em;
         }
 
         ul {
             list-style-type: none;
             padding: 0;
+            text-align: left; /* 列表文本左对齐 */
         }
 
         li {
@@ -142,7 +148,7 @@
 
         p {
             color: #666;
-            text-align: center;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -158,12 +164,11 @@
     </nav>
     <div class="container">
         <h1>搜索产品</h1>
-        <form method="GET" action="{% url 'product_search' %}">
+        <div class="search-container">
             <input type="text" id="search" name="q" placeholder="输入产品名称..." value="{{ query }}">
             <button type="submit">搜索</button>
-        </form>
-
-        <div id="suggestions"></div> <!-- 用于展示搜索建议 -->
+            <div id="suggestions"></div> <!-- 用于展示搜索建议 -->
+        </div>
 
         <h2>搜索结果</h2>
         {% if products %}
