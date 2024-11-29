@@ -13,16 +13,14 @@
             display: flex;
             justify-content: center; /* 居中内容 */
         }
+
         .container {
             max-width: 1200px; /* 限制最大宽度 */
             width: 100%;
             padding: 20px; /* 页面内边距 */
             box-sizing: border-box; /* 包括内边距在内的计算 */
         }
-<<<<<<< HEAD
 
-
-=======
         #category-list {
             background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
             padding: 20px;
@@ -32,50 +30,60 @@
             padding-left: 0;
             margin-bottom: 20px;
         }
+
         #category-list li {
             margin-bottom: 10px;
         }
+
         #category-list li a {
             text-decoration: none;
             color: #007bff; /* 统一蓝色 */
             font-weight: bold; /* 加粗链接文本 */
             transition: color 0.3s; /* 颜色过渡效果 */
         }
+
         #category-list li a:hover {
             text-decoration: underline;
             color: #0056b3; /* 悬停时改变颜色 */
         }
->>>>>>> 0d2ee390703211794d64da8f6c625a52dd9ff92a
+
         .product-list {
             display: flex;
             flex-wrap: wrap;
             gap: 20px; /* 增加产品之间的间距 */
+            justify-content: center; /* 居中产品列表 */
         }
+
         .product-item {
             background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 加深阴影效果 */
-            width: calc(33.333% - 20px); /* 三列布局 */
+            width: calc(31% - 20px); /* 三列布局 */
             box-sizing: border-box;
             text-align: center; /* 内容居中 */
             transition: transform 0.2s; /* 添加悬停效果 */
         }
+
         .product-item:hover {
             transform: translateY(-5px); /* 悬停时稍微抬起效果 */
         }
+
         .product-item h3 {
             margin-top: 10px; /* 调整标题上边距 */
             color: #007bff;
             font-size: 1.5em; /* 增大标题字体 */
         }
+
         .product-item h3 a {
             text-decoration: none;
             color: inherit;
         }
+
         .product-item h3 a:hover {
             text-decoration: underline;
         }
+
         .product-item img {
             max-width: 100%; /* 适应父容器宽度 */
             max-height: 150px; /* 限制图片最大高度 */
@@ -83,15 +91,18 @@
             border-radius: 8px; /* 图片圆角 */
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* 图片阴影 */
         }
+
         .product-item p {
             margin: 10px 0; /* 调整描述的上下间距 */
             line-height: 1.5; /* 增加行高，提高可读性 */
         }
+
         @media (max-width: 768px) {
             .product-item {
-                width: calc(50% - 20px); /* 两列布局 */
+                width: calc(48% - 10px); /* 两列布局 */
             }
         }
+
         @media (max-width: 480px) {
             .product-item {
                 width: 100%; /* 一列布局 */
@@ -102,8 +113,6 @@
 </head>
 <body>
     <div class="container">
-
-
         <div class="product-list">
             {% for product in products %}
                 <div class="product-item">
