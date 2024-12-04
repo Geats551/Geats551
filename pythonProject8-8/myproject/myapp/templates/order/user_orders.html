@@ -13,6 +13,10 @@
                     产品: {{ order.agricultural_product.name }}<br>
                     数量: {{ order.quantity }}<br>
                     订单日期: {{ order.purchase_date }}<br>
+                    地址: {{ order.address_line1 }} {% if order.address_line2 %}{{ order.address_line2 }}{% endif %}<br>
+                    城市: {{ order.city }}<br>
+                    省/州: {{ order.state }}<br>
+                    邮政编码: {{ order.zip_code }}<br>
                     {% if not order.is_cancelled %}
                         <form action="{% url 'cancel_order' order.id %}" method="POST" style="display:inline;">
                             {% csrf_token %}

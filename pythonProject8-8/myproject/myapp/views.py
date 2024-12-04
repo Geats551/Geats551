@@ -19,6 +19,9 @@ from django.contrib import messages
 
 
 
+
+
+
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = User
     fields = ['first_name', 'last_name','email']
@@ -229,3 +232,32 @@ def cancel_order(request, order_id):
     else:
         messages.warning(request, '该订单已被取消。')
     return redirect('my_orders')  # 重定向回我的订单页面
+
+@login_required
+def create_purchase(request, product_id):
+    product = get_object_or_404(AgriculturalProduct, id=product_id)
+
+    if request.method == 'POST':
+        quantity = request.POST.get('quantity')
+        address_line1 = request.POST.get('address_line1')
+        address_line2 = request.POST.get('address_line2')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        zip_code = request.POST.get('zip_code')
+
+        # 创建订单并存储地址信息
+        Purchase.objects.create(
+            user=request.user,
+            agricultural_product=product,
+            quantity=quantity,
+            address_line1=address_line1,
+            address_line2=address_line2,
+            city=city,
+            state=state,
+            zip_code=zip_code
+        )
+
+        messages.success(request, f'您已成功购买 {quantity} 个 {product.name}!')
+        return redirect('purchase_success')  # 重定向到我的订单页面
+
+    return render(request, 'order/create_order.html', {'product': product})

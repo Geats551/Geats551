@@ -45,14 +45,21 @@ class Comment(models.Model):
     def __str__(self):
         return f'{self.user.username}\'s comment on {self.agricultural_product.name}'
 
-User = get_user_model()
+
 
 class Purchase(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     agricultural_product = models.ForeignKey(AgriculturalProduct, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)  # 购买数量
     purchase_date = models.DateTimeField(auto_now_add=True)
-    is_cancelled = models.BooleanField(default=False)  # 新增字段，标记是否取消
+    is_cancelled = models.BooleanField(default=False)  # 标记是否取消
 
-    def __str__(self):
+    # 新增地址字段
+    address_line1 = models.CharField(max_length=255, default="默认地址")
+    address_line2 = models.CharField(max_length=255, blank=True)
+    city = models.CharField(max_length=100, default="默认城市")
+    state = models.CharField(max_length=100, default="默认省份")
+    zip_code = models.CharField(max_length=20, default="000000")
+
+def __str__(self):
         return f'{self.user.username} 购买了 {self.quantity} 个 {self.agricultural_product.name} 于 {self.purchase_date}'
