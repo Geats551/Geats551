@@ -3,7 +3,6 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import AgriculturalProduct, Category
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
@@ -14,10 +13,11 @@ from .forms import CommentForm
 from django.utils.timezone import localtime
 import random
 from random import sample
-from django.db.models import F
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, redirect, render
-from .models import AgriculturalProduct, Purchase
+from .models import Purchase
+from django.contrib import messages
+
+
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = User
@@ -212,3 +212,20 @@ def purchase_product(request, product_id):
 
 def purchase_success(request):
     return render(request, 'purchase/purchase_success.html')
+
+@login_required
+def user_orders(request):
+    orders = Purchase.objects.filter(user=request.user)  # 获取当前用户的所有订单
+    return render(request, 'order/user_orders.html', {'orders': orders})
+
+
+@login_required
+def cancel_order(request, order_id):
+    order = get_object_or_404(Purchase, id=order_id, user=request.user)  # 确保用户只能取消自己的订单
+    if not order.is_cancelled:  # 确保订单未被取消
+        order.is_cancelled = True
+        order.save()
+        messages.success(request, '订单已成功取消。')
+    else:
+        messages.warning(request, '该订单已被取消。')
+    return redirect('my_orders')  # 重定向回我的订单页面

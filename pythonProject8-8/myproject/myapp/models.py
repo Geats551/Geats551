@@ -52,6 +52,7 @@ class Purchase(models.Model):
     agricultural_product = models.ForeignKey(AgriculturalProduct, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)  # 购买数量
     purchase_date = models.DateTimeField(auto_now_add=True)
+    is_cancelled = models.BooleanField(default=False)  # 新增字段，标记是否取消
 
     def __str__(self):
         return f'{self.user.username} 购买了 {self.quantity} 个 {self.agricultural_product.name} 于 {self.purchase_date}'

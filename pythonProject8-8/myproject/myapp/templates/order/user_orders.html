@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>我的订单</title>
+</head>
+<body>
+    <h1>我的订单</h1>
+    {% if orders %}
+        <ul>
+            {% for order in orders %}
+                <li>
+                    产品: {{ order.agricultural_product.name }}<br>
+                    数量: {{ order.quantity }}<br>
+                    订单日期: {{ order.purchase_date }}<br>
+                    {% if not order.is_cancelled %}
+                        <form action="{% url 'cancel_order' order.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">取消订单</button>
+                        </form>
+                    {% else %}
+                        <em>订单已取消</em>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>您还没有任何订单。</p>
+    {% endif %}
+    <a href="{% url 'product_list' %}">返回商品列表</a>
+</body>
+</html>
