@@ -16,7 +16,7 @@
             /* 为固定导航栏留出空间 */
         }
 
-         nav {
+        nav {
             position: fixed;
             /* 使导航栏固定 */
             top: 0;
@@ -66,7 +66,7 @@
         }
 
         /* 产品容器样式调整 */
-       .product-container {
+        .product-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -76,7 +76,7 @@
         }
 
         /* 商品项样式调整 */
-       .product-item {
+        .product-item {
             background: rgba(255, 255, 255, 0.9);
             /* 半透明背景 */
             padding: 20px;
@@ -88,6 +88,11 @@
             /* 每个商品占约33.33%减去间距，实现每行3个 */
             box-sizing: border-box;
             /* 包含内边距与边框 */
+            transition: transform 0.3s; /* 添加过渡效果 */
+        }
+
+        .product-item:hover {
+            transform: scale(1.05); /* 鼠标悬停时放大 */
         }
 
         h2 {
@@ -145,7 +150,7 @@
                 /* 在小屏幕上减少边距 */
             }
 
-           .product-item {
+            .product-item {
                 width: 100%;
                 /* 小屏幕上每个商品占100% */
             }
@@ -164,6 +169,7 @@
         <a href="{% url 'admin:index' %}">管理员</a>
         <a href="{% url 'about' %}">关于我们</a>
     </nav>
+
     <div id="category-list">
         <ul>
             {% for category in categories %}
@@ -179,7 +185,9 @@
                 <h2><a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a></h2>
                 <p>{{ product.description }}</p>
                 {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <a href="{% url 'product_detail' pk=product.pk %}">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </a>
                 {% endif %}
                 <p>价格: {{ product.price }} 元/斤</p>
                 <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>

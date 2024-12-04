@@ -1,2 +1,105 @@
-<h2>购买成功</h2>
-<p>感谢您购买！我们会尽快处理您的订单。</p>
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>购买成功</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 背景渐变 */
+            color: #333; /* 字体颜色 */
+            padding-top: 60px; /* 为固定导航栏留出空间 */
+
+        }
+
+        nav {
+            position: fixed;
+            /* 使导航栏固定 */
+            top: 0;
+            /* 距离页面顶部 0 像素 */
+            left: 0;
+            /* 距离页面左侧 0 像素 */
+            width: 100%;
+            /* 导航栏宽度100% */
+            background-color: #f8f9fa;
+            /* 背景色 */
+            padding: 10px;
+            /* 内边距 */
+            border-bottom: 1px solid #e0e0e0;
+            /* 底部边框 */
+            z-index: 1000;
+            /* 确保在其他内容之上 */
+        }
+
+        nav a {
+            margin: 0 15px;
+            /* 链接之间的间距 */
+            text-decoration: none;
+            /* 不显示下划线 */
+            color: #007bff;
+            /* 链接颜色 */
+            font-weight: bold;
+            /* 加粗链接文本，与示例代码风格统一 */
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+            /* 鼠标悬停时下划线效果 */
+        }
+
+        .container {
+            max-width: 800px; /* 最大宽度 */
+            margin: 100px auto; /* 居中 */
+            padding: 20px; /* 内边距 */
+            background: white; /* 背景色 */
+            border-radius: 8px; /* 圆角 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+            text-align: center; /* 文本居中 */
+        }
+
+        h2 {
+            color: #007bff; /* 标题颜色 */
+            font-size: 2em; /* 标题大小 */
+            margin-bottom: 20px; /* 下边距 */
+        }
+
+        p {
+            line-height: 1.6; /* 行高 */
+            font-size: 1.2em; /* 字体大小 */
+            margin-top: 0; /* 上边距 */
+        }
+
+        @media (max-width: 600px) {
+            h2 {
+                font-size: 1.5em; /* 小屏幕上标题字号 */
+            }
+
+            p {
+                font-size: 1em; /* 小屏幕上文字大小 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="/">登出</a>
+        <a href="{% url 'recommendation' %}">主页</a>
+        <a href="{% url 'profile' %}">个人信息</a>
+        <a href="{% url 'my_orders' %}">我的订单</a>
+        <a href="{% url 'product_list' %}">所有商品</a>
+        <a href="{% url 'product_search' %}">搜索商品</a>
+        <a href="{% url 'admin:index' %}">管理员</a>
+        <a href="{% url 'about' %}">关于我们</a>
+    </nav>
+
+    <div class="container">
+        <h2>购买成功</h2>
+        <p>感谢您购买！我们会尽快处理您的订单。</p>
+    </div>
+</body>
+
+</html>
