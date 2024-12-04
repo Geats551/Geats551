@@ -44,3 +44,14 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.user.username}\'s comment on {self.agricultural_product.name}'
+
+User = get_user_model()
+
+class Purchase(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    agricultural_product = models.ForeignKey(AgriculturalProduct, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)  # 购买数量
+    purchase_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username} 购买了 {self.quantity} 个 {self.agricultural_product.name} 于 {self.purchase_date}'

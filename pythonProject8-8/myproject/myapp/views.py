@@ -16,6 +16,8 @@ import random
 from random import sample
 from django.db.models import F
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from .models import AgriculturalProduct, Purchase
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = User
@@ -192,3 +194,21 @@ def product_suggestion(request):
 def about(request):
    return render(request, 'about.html',{'name': 'about'})
 
+
+
+@login_required
+def purchase_product(request, product_id):
+    product = get_object_or_404(AgriculturalProduct, id=product_id)
+
+    if request.method == 'POST':
+        quantity = int(request.POST.get('quantity', 1))  # 从表单获取数量，默认为1
+        purchase = Purchase(user=request.user, agricultural_product=product, quantity=quantity)
+        purchase.save()
+
+        # 可选：重定向到成功页面或产品详细页面
+        return redirect('purchase_success')
+
+    return render(request, 'products/product_detail.html', {'product': product})
+
+def purchase_success(request):
+    return render(request, 'purchase/purchase_success.html')
