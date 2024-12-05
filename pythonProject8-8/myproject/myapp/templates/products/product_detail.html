@@ -174,10 +174,11 @@
             <p>{{ product.description }}</p>
             <img src="{{ product.image.url }}" alt="{{ product.name }}">
             <p>价格: {{ product.price }}元/斤</p>
-            <p>分类: <a href="{% url 'category_detail' pk=product.category.pk %}">{{ product.category.name }}</a></p>
+            <p>分类: <a >{{ product.category.name }}</a></p>
+            <p>点击购买 <a href="{% url 'create_purchase' product_id=product.pk %}">{{ product.name }}</a></p>
         </div>
 
-        <!-- 评论和购买部分 -->
+        <!-- 已有评论 -->
         <div class="comments-section">
             <div class="comment-window">
                 <h2>已有评论：</h2>
@@ -197,26 +198,7 @@
                 <button type="submit">提交评论</button>
             </form>
 
-            <!-- 购买部分 -->
-            <div class="purchase-section">
-    <h2>购买 {{ product.name }}</h2>
-    <form method="POST" action="{% url 'create_purchase' product.id %}">
-        {% csrf_token %}
-        <label for="quantity">数量:</label>
-        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
-        <label for="address_line1">地址第一行:</label>
-        <input type="text" id="address_line1" name="address_line1" required>
-        <label for="address_line2">地址第二行（可选）:</label>
-        <input type="text" id="address_line2" name="address_line2">
-        <label for="city">城市:</label>
-        <input type="text" id="city" name="city" required>
-        <label for="state">省份/州:</label>
-        <input type="text" id="state" name="state" required>
-        <label for="zip_code">邮编:</label>
-        <input type="text" id="zip_code" name="zip_code" required>
-        <button type="submit">购买</button>
-    </form>
-</div>
+
         </div>
     </div>
 </body>

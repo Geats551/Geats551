@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 购买部分 -->
+            <div class="purchase-section">
+    <h2>购买 {{ product.name }}</h2>
+    <form method="POST" action="{% url 'create_purchase' product.id %}">
+        {% csrf_token %}
+        <label for="quantity">数量:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+        <label for="state">省份/州:</label>
+        <input type="text" id="state" name="state" required>
+        <label for="city">城市:</label>
+        <input type="text" id="city" name="city" required>
+        <label for="address_line1">区县:</label>
+        <input type="text" id="address_line1" name="address_line1" required>
+        <label for="address_line2">详细地址:</label>
+        <input type="text" id="address_line2" name="address_line2">
+        <label for="zip_code">邮编:</label>
+        <input type="text" id="zip_code" name="zip_code" required>
+        <button type="submit">购买</button>
+    </form>
+</div>
+</body>
+</html>
