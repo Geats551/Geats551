@@ -15,7 +15,7 @@
         }
 
         .container {
-            max-width: 1200px; /* 限制最大宽度 */
+            max-width: 1500px; /* 限制最大宽度 */
             width: 100%;
             padding: 20px; /* 页面内边距 */
             box-sizing: border-box; /* 包括内边距在内的计算 */
@@ -50,7 +50,7 @@
         .product-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px; /* 增加产品之间的间距 */
+            gap: 30px; /* 增加产品之间的间距 */
             justify-content: center; /* 居中产品列表 */
         }
 
@@ -59,7 +59,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 加深阴影效果 */
-            width: calc(31% - 20px); /* 三列布局 */
+            width: calc(31% - 30px); /* 三列布局 */
             box-sizing: border-box;
             text-align: center; /* 内容居中 */
             transition: transform 0.2s; /* 添加悬停效果 */
@@ -86,10 +86,15 @@
 
         .product-item img {
             max-width: 100%; /* 适应父容器宽度 */
-            max-height: 150px; /* 限制图片最大高度 */
+            max-height: 300px; /* 增加图片最大高度 */
             margin: 10px auto; /* 增加上下间距，居中显示 */
             border-radius: 8px; /* 图片圆角 */
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* 图片阴影 */
+            transition: transform 0.2s; /* 图片悬停效果 */
+        }
+
+        .product-item img:hover {
+            transform: scale(1.05); /* 悬停时放大图片 */
         }
 
         .product-item p {
@@ -99,7 +104,7 @@
 
         @media (max-width: 768px) {
             .product-item {
-                width: calc(48% - 10px); /* 两列布局 */
+                width: calc(48% - 30px); /* 两列布局 */
             }
         }
 
@@ -118,7 +123,7 @@
                 <div class="product-item">
                     <h3><a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a></h3>
                     {% if product.image %}
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        <a href="{% url 'product_detail' pk=product.pk %}"><img src="{{ product.image.url }}" alt="{{ product.name }}"></a>
                     {% endif %}
                     <p>{{ product.description|truncatewords:50 }}</p>
                     <p>价格: {{ product.price }}元/斤</p>
