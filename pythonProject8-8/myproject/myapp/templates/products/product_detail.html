@@ -56,6 +56,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: transform 0.3s; /* 添加生动效果 */
+        }
+
+        .product-info:hover {
+            transform: scale(1.02); /* 鼠标悬停时轻微放大 */
         }
 
         h1 {
@@ -85,25 +90,33 @@
         }
 
         .comment-window {
-            height: 300px;
+            height: 400px; /* 放大评论显示区域 */
             overflow-y: auto;
-            padding: 10px;
-            background-color: #f0f0f0;
+            padding: 15px; /* 增加内边距 */
+            background-color: #f9f9f9; /* 改变背景色 */
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
             margin-bottom: 20px;
         }
 
         .comment {
             background: #ffffff;
-            padding: 10px;
+            padding: 15px; /* 增加内边距 */
             border-radius: 4px;
             margin-top: 10px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s; /* 添加生动效果 */
+        }
+
+        .comment:hover {
+            transform: translateY(-2px); /* 鼠标悬停时轻微提升效果 */
         }
 
         .comment small {
             color: #666;
+            align-self: flex-end; /* 日期右对齐 */
         }
 
         form {
@@ -111,6 +124,7 @@
             padding: 20px;
             border-radius: 4px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 10px; /* 确保表单距评论内容有间距 */
         }
 
         form button {
@@ -122,6 +136,7 @@
             cursor: pointer;
             margin-top: 10px;
             transition: background-color 0.3s;
+            width: 100%; /* 全宽按钮 */
         }
 
         form button:hover {
@@ -139,6 +154,17 @@
 
         .purchase-section h2 {
             margin-bottom: 15px; /* 标题与内容的间距 */
+        }
+
+        .purchase-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .purchase-link:hover {
+            text-decoration: underline;
+            color: #0056b3; /* 鼠标悬停时链接颜色变化 */
         }
 
         .purchase-section input[type="number"] {
@@ -174,8 +200,8 @@
             <p>{{ product.description }}</p>
             <img src="{{ product.image.url }}" alt="{{ product.name }}">
             <p>价格: {{ product.price }}元/斤</p>
-            <p>分类: <a >{{ product.category.name }}</a></p>
-            <p>点击购买 <a href="{% url 'create_purchase' product_id=product.pk %}">{{ product.name }}</a></p>
+            <p>分类: <a>{{ product.category.name }}</a></p>
+            <p>点击购买 <a class="purchase-link" href="{% url 'create_purchase' product_id=product.pk %}">{{ product.name }}</a></p> <!-- 修改为超链接 -->
         </div>
 
         <!-- 已有评论 -->
@@ -184,8 +210,9 @@
                 <h2>已有评论：</h2>
                 {% for comment in comments %}
                     <div class="comment">
-                        <p><strong>{{ comment.user.username }}:</strong> {{ comment.text }}</p>
-                        <p><small>{{ comment.created_at|date:"Y-m-d H:i:s" }}</small></p>
+                        <p><strong>{{ comment.user.username }}:</strong></p>
+                        <p>{{ comment.text }}</p>
+                        <small>{{ comment.created_at|date:"Y-m-d H:i:s" }}</small> <!-- 日期右下角对齐 -->
                     </div>
                 {% endfor %}
             </div>
@@ -193,12 +220,10 @@
             <!-- 评论表单 -->
             <form method="post">
                 {% csrf_token %}
-                <label for="comment-text">评论:</label>
+                <label for="comment-text">发表评论:</label>
                 <textarea id="comment-text" name="text" rows="4" cols="50" required></textarea>
                 <button type="submit">提交评论</button>
             </form>
-
-
         </div>
     </div>
 </body>

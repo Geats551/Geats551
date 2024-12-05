@@ -10,59 +10,68 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(to right, #ff7e5f, #feb47b);
-            /* 渐变背景 */
             color: #333;
-            padding-top: 60px;
-            /* 为固定导航栏留出空间 */
+            padding-top: 60px; /* 为固定导航栏留出空间 */
         }
 
         nav {
-            position: fixed;
-            /* 使导航栏固定 */
+            position: fixed; /* 使导航栏固定 */
             top: 0;
-            /* 距离页面顶部 0 像素 */
             left: 0;
-            /* 距离页面左侧 0 像素 */
             width: 100%;
-            /* 导航栏宽度100% */
-            background-color: #f8f9fa;
-            /* 背景色 */
+            background-color: #f8f9fa; /* 背景色 */
             padding: 10px;
-            /* 内边距 */
-            border-bottom: 1px solid #e0e0e0;
-            /* 底部边框 */
-            z-index: 1000;
-            /* 确保在其他内容之上 */
+            border-bottom: 1px solid #e0e0e0; /* 底部边框 */
+            z-index: 1000; /* 确保在其他内容之上 */
         }
 
         nav a {
-            margin: 0 15px;
-            /* 链接之间的间距 */
-            text-decoration: none;
-            /* 不显示下划线 */
-            color: #007bff;
-            /* 链接颜色 */
-            font-weight: bold;
-            /* 加粗链接文本，与示例代码风格统一 */
+            margin: 0 15px; /* 链接之间的间距 */
+            text-decoration: none; /* 不显示下划线 */
+            color: #007bff; /* 链接颜色 */
+            font-weight: bold; /* 加粗链接文本 */
         }
 
         nav a:hover {
-            text-decoration: underline;
-            /* 鼠标悬停时下划线效果 */
+            text-decoration: underline; /* 鼠标悬停时下划线效果 */
         }
 
-        #category-list ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-            /* 上下间距 */
+        /* 分类列表样式 */
+        .category-list {
+            background-color: #ffffff; /* 白色背景 */
+            border-radius: 8px; /* 圆角边框 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+            padding: 20px; /* 增加内边距 */
+            margin: 20px auto; /* 上下margin，居中 */
+            display: flex; /* 使用flexbox布局 */
+            justify-content: center; /* 在主轴上居中 */
+            max-width: 800px; /* 设置最大宽度以限制过大 */
         }
 
-        #category-list li {
-            margin: 0 15px;
-            /* 增加类别项间距 */
+        .category-list ul {
+            display: flex; /* 设置列表为水平排列 */
+            padding: 0; /* 去掉内边距 */
+            margin: 0; /* 去掉边距 */
+            list-style: none; /* 去掉默认列表样式 */
+        }
+
+        .category-list li {
+            margin: 0 15px; /* 分类项之间的间距 */
+        }
+
+        .category-list a {
+            font-size: 1.2em; /* 字体大小 */
+            font-weight: bold; /* 加粗字体 */
+            color: #007bff; /* 链接颜色 */
+            text-decoration: none; /* 无下划线 */
+            transition: color 0.3s; /* 增加颜色过渡 */
+            padding: 8px 12px; /* 添加内边距，增加可点击区域 */
+            border-radius: 5px; /* 圆角边框 */
+        }
+
+        .category-list a:hover {
+            color: #ff6600; /* 悬停时更改颜色 */
+            background-color: rgba(255, 255, 255, 0.8); /* 悬停时背景色 */
         }
 
         /* 产品容器样式调整 */
@@ -77,17 +86,13 @@
 
         /* 商品项样式调整 */
         .product-item {
-            background: rgba(255, 255, 255, 0.9);
-            /* 半透明背景 */
+            background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-            /* 上下间距 */
-            width: calc(33.33% - 30px);
-            /* 每个商品占约33.33%减去间距，实现每行3个 */
-            box-sizing: border-box;
-            /* 包含内边距与边框 */
+            margin: 20px 0; /* 上下间距 */
+            width: calc(33.33% - 30px); /* 每个商品占约33.33%减去间距 */
+            box-sizing: border-box; /* 包含内边距与边框 */
             transition: transform 0.3s; /* 添加过渡效果 */
         }
 
@@ -98,61 +103,56 @@
         h2 {
             margin-top: 0;
             color: #007bff;
-            font-size: 1.5em;
-            /* 调整标题大小 */
+            font-size: 1.5em; /* 调整标题大小 */
         }
 
         h2 a {
             text-decoration: none;
-            color: inherit;
-            /* 继承颜色 */
+            color: inherit; /* 继承颜色 */
         }
 
         h2 a:hover {
-            text-decoration: underline;
-            /* 悬停下划线 */
+            text-decoration: underline; /* 悬停下划线 */
         }
 
         img {
-            max-width: 100%;
-            /* 确保图片响应式宽度 */
-            height: auto;
-            /* 自适应高度 */
-            border-radius: 4px;
-            /* 图片边角 */
-            margin-top: 10px;
-            /* 上间距 */
+            max-width: 100%; /* 确保图片响应式宽度 */
+            height: auto; /* 自适应高度 */
+            border-radius: 4px; /* 图片边角 */
+            margin-top: 10px; /* 上间距 */
         }
 
         p {
-            margin: 10px 0;
-            /* 上下间距 */
-            line-height: 1.6;
-            /* 增加行高 */
+            margin: 10px 0; /* 上下间距 */
+            line-height: 1.6; /* 增加行高 */
         }
 
         a {
-            color: #007bff;
-            /* 链接颜色 */
-            text-decoration: none;
-            /* 去掉下划线 */
+            color: #007bff; /* 链接颜色 */
+            text-decoration: none; /* 去掉下划线 */
         }
 
         a:hover {
-            text-decoration: underline;
-            /* 悬停下划线 */
+            text-decoration: underline; /* 悬停下划线 */
         }
 
         /* 响应式样式 */
         @media (max-width: 600px) {
             nav a {
-                margin: 0 10px;
-                /* 在小屏幕上减少边距 */
+                margin: 0 10px; /* 在小屏幕上减少边距 */
             }
 
             .product-item {
-                width: 100%;
-                /* 小屏幕上每个商品占100% */
+                width: 100%; /* 小屏幕上每个商品占100% */
+            }
+
+            .category-list {
+                flex-direction: column; /* 小屏幕上垂直排列 */
+                align-items: center; /* 居中对齐 */
+            }
+
+            .category-list li {
+                margin: 5px 0; /* 在小屏幕上调整间距 */
             }
         }
     </style>
@@ -170,7 +170,7 @@
         <a href="{% url 'about' %}">关于我们</a>
     </nav>
 
-    <div id="category-list">
+    <div id="category-list" class="category-list">
         <ul>
             {% for category in categories %}
                 <li><a href="{% url 'category_detail' pk=category.pk %}">{{ category.name }}</a></li>
